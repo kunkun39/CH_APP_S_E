@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+
+    <class name="com.changhong.system.domain.ClientVersion" table="client_version">
+        <id name="id" column="id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property name="clientVersion" column="client_version" type="java.lang.Integer"/>
+        <property name="beginUpdate" column="begin_update" type="java.lang.Boolean"/>
+    </class>
+
+    <class name="com.changhong.system.domain.ClientBootImage" table="boot_image">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="actualFileName" column="actual_filename" insert="true" update="true" type="java.lang.String"/>
+    </class>
+
+    <class name="com.changhong.system.domain.MultipHost" table="multip_host">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="timestamp" column="timestamp" type="java.util.Date"/>
+        <property name="hostName" column="host_name" type="java.lang.String"/>
+        <property name="hostEnabled" column="host_enabled" type="java.lang.Boolean"/>
+    </class>
+</hibernate-mapping>
