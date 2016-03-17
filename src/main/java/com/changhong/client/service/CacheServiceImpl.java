@@ -152,4 +152,16 @@ public class CacheServiceImpl implements CacheService {
     public void setClientBeginUpdate(boolean clientBeginUpdate) {
         cacheService.setClientBeginUpdate(clientBeginUpdate);
     }
+
+    /************************************首页海报************************************/
+
+    @Override
+    public void resetHomePagePoster(HomePagePosterDTO dto, boolean remove) {
+        cacheService.resetHomePagePoster(dto, remove);
+    }
+
+    @Override
+    public List<HomePagePosterDTO> obtainHomePagePoster() {
+        return cacheService.obtainHomePagePoster();
+    }
 }

@@ -20,6 +20,14 @@ public interface AppDao extends EntityObjectDao {
 
     int loadCategoryApps(int categoryId);
 
+    /**
+     * 通过methos方法获取该sequence相邻的AppCategory
+     * @param sequence
+     * @param method 取值：up down
+     * @return AppCategory
+     */
+    AppCategory loadAppCategory(int sequence, String method);
+
     /**************************************专题部分****************************************/
 
     List<AppTopic> loadAllTopics();
@@ -64,4 +72,7 @@ public interface AppDao extends EntityObjectDao {
 
     boolean isAppMustSet(int appId);
 
+    /************************************首页海报************************************/
+
+    List<HomePagePoster> loadAllHomePagePoster();
 }

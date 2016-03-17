@@ -1,6 +1,7 @@
 package com.changhong.system.service;
 
 import com.changhong.system.domain.CategoryIcon;
+import com.changhong.system.domain.HomePagePoster;
 import com.changhong.system.domain.MarketApp;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,10 @@ public interface DocumentService {
     void uploadTopicIconData(CategoryIcon icon);
 
     void deleteTopicIconData(String filename);
+
+    void uploadHomePagePosterData(HomePagePoster poster);
+
+    void deleteHomePagePosterData(String filename);
 
     Map<String, String> saveApkParserFileToFS(MultipartFile apkParserFlie);
 }

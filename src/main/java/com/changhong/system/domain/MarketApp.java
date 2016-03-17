@@ -27,6 +27,8 @@ public class MarketApp extends EntityBase {
 
     private String appName;
 
+    private String appSubTitle;
+
     private String appDescription;
 
     private String appNote;
@@ -48,6 +50,8 @@ public class MarketApp extends EntityBase {
     private String pinYingFull;
 
     private DateTime createTime;
+
+    private DateTime releaseTime;
 
     private AppStatus appStatus;
 
@@ -78,9 +82,10 @@ public class MarketApp extends EntityBase {
     public MarketApp() {
     }
 
-    public MarketApp(String appName, String appDescription, String appNote, int appScores, boolean recommend) {
+    public MarketApp(String appName, String appSubTitle, String appDescription, String appNote, int appScores, boolean recommend) {
         this.appKey = CHStringUtils.getRandomString(8);
         this.appName = appName;
+        this.appSubTitle = appSubTitle;
         this.appDescription = appDescription;
         this.appNote = appNote;
         this.downloadTimes = 0;
@@ -172,6 +177,14 @@ public class MarketApp extends EntityBase {
         this.appName = appName;
     }
 
+    public String getAppSubTitle() {
+        return appSubTitle;
+    }
+
+    public void setAppSubTitle(String appSubTitle) {
+        this.appSubTitle = appSubTitle;
+    }
+
     public String getAppDescription() {
         return appDescription;
     }
@@ -194,6 +207,14 @@ public class MarketApp extends EntityBase {
 
     public void setCreateTime(DateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public DateTime getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(DateTime releaseTime) {
+        this.releaseTime = releaseTime;
     }
 
     public int getAppScores() {

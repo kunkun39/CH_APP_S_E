@@ -99,4 +99,11 @@ public interface CacheService {
     boolean isClientBeginUpdate();
 
     void setClientBeginUpdate(boolean clientBeginUpdate);
+
+    /************************************首页海报************************************/
+
+    void resetHomePagePoster(HomePagePosterDTO dto, boolean remove);
+
+    List<HomePagePosterDTO> obtainHomePagePoster();
+
 }

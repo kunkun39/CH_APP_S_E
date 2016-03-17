@@ -40,6 +40,14 @@
 .tv_main .centerside .preview3 .wrap3 img { width:100%; height:95%; }
 .tv_main .centerside .preview3 .wrap3 name { height:30px; width:100%; margin-top:1px; text-align: center;}
 
+.tv_main .centerside1 {padding-top:10px; padding-left:19px; float:left;}
+.tv_main .centerside1 .preview4 { width:250px; height:160px; float:left; }
+.tv_main .centerside1 .preview4 .wrap4 {width:220px; height:120px;  background:#bfbfbf; margin-bottom:10px; padding:10px; text-align: center;float:left; font-size:12px;}
+.tv_main .centerside1 .preview4 .wrap4 img { width:100%; height:85%; }
+.tv_main .centerside1 .preview4 .wrap4 div { width:100%; height:85%;}
+.tv_main .centerside1 .preview4 .wrap4 a img{ width:50px; height:50px;margin-top: -115px;margin-left: 0px;}
+.tv_main .centerside1 .preview4 .wrap4 .action { height:30px; width:100%; margin-top:5px; text-align: center;}
+
 .tv_main .rightside { width:360px; float:left;}
 .tv_main .rightside .list { overflow:hidden; _zoom:1; }
 .tv_main .rightside .list li { position:relative; float:left; width:140px; height:136px; margin-top:10px; _display:inline; text-align: center; overflow:hidden; }

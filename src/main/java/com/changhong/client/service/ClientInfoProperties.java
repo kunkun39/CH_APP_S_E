@@ -19,6 +19,8 @@ public class ClientInfoProperties {
 
     public final static String CATEGORY_FILENAME = "fn";
 
+    public final static String CATEGORY_SEQUENCE = "sequence";
+
 
     /************************************APP Part************************************************/
 
@@ -61,4 +63,14 @@ public class ClientInfoProperties {
     public final static String APP_IS_VIP = "is_vip";
 
     public final static String APP_CAN_DOWNLOAD = "enable_download";
+
+    public final static String SUB_TITLE = "subtitle";
+
+    public final static String RELEASE_TIME = "time";
+
+    /************************************HomePage Poster Part************************************************/
+
+    public final  static  String HOMEPAGE_POSTER_ID = "id";
+
+    public final  static  String HOMEPAGE_POSTER_FILEPATH = "poster_fp";
 }

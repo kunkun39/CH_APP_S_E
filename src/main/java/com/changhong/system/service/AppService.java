@@ -30,6 +30,8 @@ public interface AppService {
 
     boolean obtainCategoryHasApps(int categoryId);
 
+    void changeCategorySequence(int categoryId, String method);
+
     /**************************************专题部分****************************************/
 
     List<AppTopicDTO> obtainAllTopics();
@@ -89,4 +91,13 @@ public interface AppService {
     String updateAppMust(int appId, boolean install);
 
     void deleteAppMust(int appMustId);
+
+    /************************************首页海报部分************************************/
+    HomePagePosterDTO obtainHomePagePosterById(int id);
+
+    List<HomePagePosterDTO> obtainHomePagePoster();
+
+    void updateHomePagePoster(int id, MultipartFile posterFile);
+
+    void deleteHomePagePoster(int id);
 }

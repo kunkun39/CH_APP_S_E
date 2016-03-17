@@ -95,4 +95,9 @@ public interface ClientService {
      * 云备份
      */
     String requestBackupApps(String appIds, String boxMac);
+
+    /**
+     * 获取首页所有海报
+     */
+    String obtainHomePagePosters();
 }

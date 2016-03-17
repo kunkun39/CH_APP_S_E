@@ -189,6 +189,38 @@ public class DocumentServiceImpl implements DocumentService, InitializingBean {
         iconFile.deleteOnExit();
     }
 
+    @Override
+    public void uploadHomePagePosterData(HomePagePoster poster) {
+        File directory = new File(baseStorePath + "homepageposter");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        //save poster file
+        File posterFile = new File(directory, poster.getActualFileName());
+        try {
+            OutputStream dataOut = new FileOutputStream(posterFile.getAbsolutePath());
+            FileCopyUtils.copy(poster.getFile().getInputStream(), dataOut);
+
+            logger.info("finish upload category icon file");
+        } catch (Exception e) {
+            logger.error(e);
+            throw new CHDocumentOperationException("exception poster file failed for update", e);
+        }
+    }
+
+    @Override
+    public void deleteHomePagePosterData(String filename) {
+        File directory = new File(baseStorePath + "homepageposter");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        //delete poster file
+        File posterFile = new File(directory, filename);
+        posterFile.delete();
+    }
+
     public Map<String, String> saveApkParserFileToFS(MultipartFile apkParserFlie) {
         Map<String, String> model = new HashMap<String, String>();
 

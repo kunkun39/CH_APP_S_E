@@ -61,9 +61,6 @@
                           <option value="-1" <c:if test="${-1==paging.categoryId}">selected="true"</c:if>>All</option>
                           <c:forEach items="${categories}" var="category">
                             <option value="${category.id}" <c:if test="${category.id==paging.categoryId}">selected="true"</c:if>>${category.categoryName}</option>
-                            <c:forEach items="${category.children}" var="child" varStatus="counter">
-                                <option value="${child.id}" <c:if test="${child.id==paging.categoryId}">selected="true"</c:if>>[${counter.count}] ${category.categoryName} -> ${child.categoryName}</option>
-                            </c:forEach>
                           </c:forEach>
                       </select>
                       &nbsp;
@@ -148,16 +145,17 @@
                                 </div>
                                 <span class="user-info">
                                     <span style="font-weight:bold">Name</span>: ${app.appFullName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight:bold">SubTitle</span>: ${app.appSubTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Version</span>: ${app.appVersion}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Category</span>: ${app.fullCategoryName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="font-weight:bold">Download Times</span>: ${app.downloadTimes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Size</span>: ${app.appSize}M&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                                     <br/>
                                     <span style="font-weight:bold">Status</span>: ${app.statusName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Update Time</span>: ${app.updateDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="font-weight:bold">Scorec</span>: ${app.appScores} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight:bold">Scores</span>: ${app.appScores} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                     <br/>
+                                    <span style="font-weight:bold">Download Times</span>: ${app.downloadTimes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <c:if test="${app.recommend}">
                                         <span style="font-weight:bold;">Recommend</span>:Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </c:if>

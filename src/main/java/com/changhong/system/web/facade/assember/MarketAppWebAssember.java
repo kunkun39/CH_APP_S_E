@@ -33,7 +33,7 @@ public class MarketAppWebAssember {
             app.setAppScores(dto.getAppScores());
             app.setRecommend(dto.isRecommend());
         } else {
-            app = new MarketApp(dto.getAppFullName().trim(), dto.getAppDescription(), dto.getAppNote(), dto.getAppScores(), dto.isRecommend());
+            app = new MarketApp(dto.getAppFullName().trim(), dto.getAppSubTitle(), dto.getAppDescription(), dto.getAppNote(), dto.getAppScores(), dto.isRecommend());
             history = DomainHelper.generateAppChangeHistories(app, dto);
         }
 
@@ -54,6 +54,7 @@ public class MarketAppWebAssember {
         final int id = marketApp.getId();
         final String appKey = marketApp.getAppKey();
         final String appName = marketApp.getAppName();
+        final String appSubTitle = marketApp.getAppSubTitle();
         final String appDescription = marketApp.getAppDescription();
         final String appNote = marketApp.getAppNote();
         final String appVersionInt = marketApp.getAppVersionInt() + "";
@@ -87,6 +88,7 @@ public class MarketAppWebAssember {
         final String posterFakeFileName = posterFile.getUploadFileName();
 
         final String updateDate = CHDateUtils.getSimpleDateFormat(marketApp.getTimestamp());
+        final String releaseDate = marketApp.getReleaseTime().toString("yyyy-MM-dd HH:mm:ss");
         final String pinyingShort = marketApp.getPinYingShort();
         final String pinyingFull = marketApp.getPinYingFull();
 
@@ -94,12 +96,12 @@ public class MarketAppWebAssember {
         final boolean vip = marketApp.isVip();
         List<VipGroupDTO> groups = VipWebAssember.toVipGroupDTOList(marketApp.getVipGroups());
 
-        MarketAppDTO dto =  new MarketAppDTO(id, appKey, appName, appDescription, appNote, appVersionInt, appVersion, appPackage,
+        MarketAppDTO dto =  new MarketAppDTO(id, appKey, appName, appSubTitle, appDescription, appNote, appVersionInt, appVersion, appPackage,
                 appScores, downloadTimes, appSize, status, statusName, recommend, categoryId, categoryName, fullCategoryName,
                 appIconId, iconActualFileName, iconFakeFileName,
                 appFileId, apkActualFileName, apkFakeFileName,
                 posterFileId, posterActualFileName, posterFakeFileName,
-                updateDate, pinyingShort, pinyingFull, topics, vip, groups);
+                updateDate, releaseDate, pinyingShort, pinyingFull, topics, vip, groups);
 
         return dto;
     }

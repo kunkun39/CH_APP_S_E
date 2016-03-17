@@ -14,6 +14,7 @@ import com.changhong.system.web.facade.dto.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Category;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -99,6 +100,25 @@ public class AppServiceImpl implements AppService {
     public boolean obtainCategoryHasApps(int categoryId) {
         int size = appDao.loadCategoryApps(categoryId);
         return size > 0 ? true : false;
+    }
+
+    @Override
+    public void changeCategorySequence(int categoryId, String method) {
+        AppCategory category = (AppCategory) appDao.findById(categoryId, AppCategory.class);
+        if (category != null) {
+            AppCategory category_change = appDao.loadAppCategory(category.getSequence(), method);
+            if (category_change != null) {
+                int tmp_sequencce = category.getSequence();
+                category.setSequence(category_change.getSequence());
+                category_change.setSequence(tmp_sequencce);
+
+                appDao.saveOrUpdate(category);
+                appDao.saveOrUpdate(category_change);
+
+                cacheService.resetAppCategoryInCache(AppCategoryWebAssember.toAppCategoryDTO(category, false), false);
+                cacheService.resetAppCategoryInCache(AppCategoryWebAssember.toAppCategoryDTO(category_change, false), false);
+            }
+        }
     }
 
     /**************************************专题部分****************************************/
@@ -250,6 +270,11 @@ public class AppServiceImpl implements AppService {
 
     public void changeMarketAppStatus(int marketAppId, String resetStatus) {
         MarketApp app = (MarketApp) appDao.findById(marketAppId, MarketApp.class);
+
+        // 更新发布时间
+        if (app.getAppStatus() == AppStatus.CREAETED && AppStatus.PASSED.name().equals(resetStatus)) {
+            app.setReleaseTime(new DateTime());
+        }
         AppChangeHistory history = DomainHelper.generateStatusChangeHistory(app, app.getAppStatus().name(), resetStatus);
         app.setAppStatus(AppStatus.valueOf(resetStatus));
 
@@ -518,5 +543,53 @@ public class AppServiceImpl implements AppService {
         cacheService.resetAppMustInCache(dto, true);
 
         appDao.delete(appMust);
+    }
+
+
+
+    /************************************首页海报部分************************************/
+
+    @Override
+    public HomePagePosterDTO obtainHomePagePosterById(int id) {
+        HomePagePoster poster = (HomePagePoster) appDao.findById(id, HomePagePoster.class);
+        return HomePagePosterWebAssember.toPosterDTO(poster);
+    }
+
+    @Override
+    public List<HomePagePosterDTO> obtainHomePagePoster() {
+        List<HomePagePoster> posters = appDao.loadAllHomePagePoster();
+        return HomePagePosterWebAssember.toMarketAppDTOList(posters);
+    }
+
+    @Override
+    public void updateHomePagePoster(int id, MultipartFile posterFile) {
+        HomePagePoster poster = (HomePagePoster) appDao.findById(id, HomePagePoster.class);
+        if (poster != null && posterFile != null && posterFile.getSize() > 0) {
+            if (StringUtils.hasText(poster.getActualFileName())) {
+                documentService.deleteHomePagePosterData(poster.getActualFileName());
+            }
+            poster.changeFile(posterFile);
+            documentService.uploadHomePagePosterData(poster);
+            appDao.saveOrUpdate(poster);
+
+            HomePagePosterDTO dto = HomePagePosterWebAssember.toPosterDTO(poster);
+            cacheService.resetHomePagePoster(dto, false);
+        }
+    }
+
+    @Override
+    public void deleteHomePagePoster(int id) {
+        HomePagePoster poster = (HomePagePoster) appDao.findById(id, HomePagePoster.class);
+        if (poster != null && StringUtils.hasText(poster.getActualFileName())) {
+            documentService.deleteHomePagePosterData(poster.getActualFileName());
+            poster.setActualFileName("");
+            poster.setActualFilePath("");
+            poster.setUploadFileName("");
+            poster.setUploadTime(null);
+            appDao.saveOrUpdate(poster);
+
+            HomePagePosterDTO dto = HomePagePosterWebAssember.toPosterDTO(poster);
+            cacheService.resetHomePagePoster(dto, false);
+        }
     }
 }

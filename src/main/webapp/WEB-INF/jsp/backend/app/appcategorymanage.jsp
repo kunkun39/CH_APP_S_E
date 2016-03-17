@@ -19,6 +19,11 @@
     <script src="${pageContext.request.contextPath}/js/popup/modal.popup.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui-1.8.22.custom.css" type="text/css"/>
+    <style type="text/css">
+        .tbl_paddingleft {
+            padding-left: 20px !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -34,17 +39,6 @@
   </div>
 
   <div class="container-fluid">
-    <h4></h4>
-    <div class="alert alert-info alert-block">
-        <h4 class="alert-heading">Notice</h4><br/>
-        <li>We already initial some categories for the system [Entertainment -> Video, Music, Health, Parents&Child][Game -> Relax, Cards, Action, Ohter][Life -> Tools, Education, Consult, News]</li>
-        <li>System now support 3 first-level category and unlimited second-level categories, the second-level category can't change to first-level category</li>
-        <li>We give you an example, please click the picture see details</li>
-        <br/>
-        <a class="thumbnail lightbox_trigger" href="${pageContext.request.contextPath}/images/category/categoryexample.png">
-            <img width="100px" height="50px" alt="" src="${pageContext.request.contextPath}/images/category/categoryexample.png"/>
-        </a>
-    </div>
 
     <div class="row-fluid">
       <div class="span12">
@@ -59,47 +53,35 @@
             <h5>App Category Management</h5>
         </div>
 
-        <div class="widget-content">
-
-            <c:forEach items="${categories}" var="category">
-            <ul class="thumbnails">
-
-                <li class="span2">
-                    <a class="thumbnail">
-                        <img style="width: 60px; height: 60px;" src="${pageContext.request.contextPath}/images/backgrounds/category2.jpg" alt="" >
-                    </a>
-                    <div class="actions">
-                        <a title="" href="javascript:void(0);" onclick="openCategoryDialog('${category.id}', 'edit');"><i class="icon-pencil icon-white"></i></a>
-                        <c:if test="${category.children == null || empty category.children}">
-                            <a title="" href="javascript:void(0);" onclick="categoryDeleteConfirm('${category.id}');"><i class="icon-remove icon-white"></i></a>
-                        </c:if>
-                    </div>
-                    <div style="text-align: center;">
-                        ${category.categoryName}
-                    </div>
-                </li>
-
-                <div id="menu">
-                    <c:forEach items="${category.children}" var="child">
-                        <li class="span1">
-
-                                 <a class="thumbnail">
-                                    <img style="width: 60px; height: 60px;" src="${fileRequestHost}category/${child.categoryIconName}" alt="" >
-                                </a>
-
-                            <div class="actions">
-                                <a title="" href="javascript:void(0);" onclick="openCategoryDialog('${child.id}', 'edit');"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="javascript:void(0);" onclick="categoryDeleteConfirm('${child.id}');"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                            <div style="text-align: center;">
-                                ${child.categoryName}
-                            </div>
-                        </li>
+        <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th width="50%" class="tbl_paddingleft">Category Name</th>
+                        <th width="20%" class="tbl_paddingleft">Move</th>
+                        <th class="tbl_paddingleft">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${categories}" var="category">
+                        <tr class="gradeX">
+                            <td class="tbl_paddingleft">${category.categoryName}</td>
+                            <td class="tbl_paddingleft">
+                                <c:if test="${sequence_min != category.sequence}">
+                                    <a title="up" href="javascript:void(0);" onclick="changeCategorySequencce(${category.id}, 'up');"><img src="${pageContext.request.contextPath}/images/sequence_up.gif"/></a>
+                                </c:if>
+                                <c:if test="${sequence_max != category.sequence}">
+                                    <a title="down" href="javascript:void(0);" onclick="changeCategorySequencce(${category.id}, 'down');"><img src="${pageContext.request.contextPath}/images/sequence_down.gif"/></a>
+                                </c:if>
+                            </td>
+                            <td class="center tbl_paddingleft">
+                                <a href="javascript:void(0);" onclick="openCategoryDialog('${category.id}', 'edit');" class="btn btn-primary btn-mini">Edit</a>
+                                <a href="javascript:void(0);" onclick="categoryDeleteConfirm('${category.id}');" class="btn btn-danger btn-mini">Delete</a>
+                            </td>
+                        </tr>
                     </c:forEach>
-                </div>
-
-            </ul>
-            </c:forEach>
+                </tbody>
+            </table>
         </div>
       </div>
 
@@ -259,6 +241,10 @@
                     }
                 }
             });
+    }
+
+    function changeCategorySequencce(id, method) {
+        window.location.href = '${pageContext.request.contextPath}/backend/categorysequencechg.html?categoryId=' + id + '&method=' + method;
     }
 
 </script>

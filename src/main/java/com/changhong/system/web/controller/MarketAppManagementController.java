@@ -34,7 +34,7 @@ public class MarketAppManagementController extends AbstractController {
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> model = new HashMap<String, Object>();
 
-        List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(true);
+        List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(false);
         model.put("categories", categories);
 
         List<AppTopicDTO> topics = appService.obtainAllTopics();

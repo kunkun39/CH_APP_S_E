@@ -64,7 +64,7 @@ public class MarketAppFormController extends SimpleFormController {
         request.setAttribute("categoryId", categoryId);
         request.setAttribute("topicId", topicId);
 
-        List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(true);
+        List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(false);
         request.setAttribute("categories", categories);
 
         List<AppTopicDTO> topics = appService.obtainAllTopics();
@@ -88,6 +88,11 @@ public class MarketAppFormController extends SimpleFormController {
         String appFullName = ServletRequestUtils.getStringParameter(request, "appFullName", "");
         if (!StringUtils.hasText(appFullName)) {
             errors.rejectValue("appFullName", "app.appName.empty");
+        }
+
+        String appSubTitle = ServletRequestUtils.getStringParameter(request, "appSubTitle", "");
+        if (!StringUtils.hasText(appSubTitle)) {
+            errors.rejectValue("appSubTitle", "app.appSubTitle.empty");
         }
 
         /**

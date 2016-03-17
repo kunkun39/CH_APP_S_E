@@ -70,6 +70,7 @@
                 <prop key="/backend/appcategoryform.html">appCategoryFormController</prop>
                 <prop key="/backend/appcategoryoverview.html">appCategoryManagementController</prop>
                 <prop key="/backend/categorydelete.html">appCategoryDeleteController</prop>
+                <prop key="/backend/categorysequencechg.html">appCategorySequenceChangeController</prop>
                 <prop key="/backend/apptopicform.html">appTopicFormController</prop>
                 <prop key="/backend/apptopicoverview.html">appTopicManagementController</prop>
                 <prop key="/backend/topicdelete.html">appTopicDeleteController</prop>
@@ -84,6 +85,8 @@
                 <prop key="/backend/cancelboxrecommend.html">boxRecommendCancelController</prop>
                 <prop key="/backend/luncherrecommend.html">luncherRecommendManagementController</prop>
                 <prop key="/backend/appmust.html">appMustManagementController</prop>
+                <prop key="/backend/homepageposterform.html">homePagePosterFormController</prop>
+                <prop key="/backend/homepageposterdelete.html">homePagePosterDeleteController</prop>
 
                 <!--前台客户端接口-->
                 <prop key="/client/appcategories.html">clientAppCategoryController</prop>
@@ -104,6 +107,7 @@
                 <prop key="/client/deletebackupapp.html">clientDeleteAppBackupController</prop>
                 <prop key="/client/getbackupapp.html">clientGetAllAppBackupController</prop>
                 <prop key="/client/requestbackupapp.html">clientApplyAppBackupController</prop>
+                <prop key="/client/homepageposter.html">clientHomePagePosterController</prop>
             </props>
 
         </property>
@@ -116,7 +120,7 @@
         <property name="multipHost" value="${application.multip.host}"/>
     </bean>
 
-    <bean id="dashboardController" class="com.changhong.system.web.controller.DashboardController">
+    <bean id="dashboardController" class="com.changhong.system.web.controller.Dashboard2Controller">
         <property name="appService" ref="appService"/>
         <property name="fileRequestHost" value="${application.file.request.path}"/>
     </bean>
@@ -222,6 +226,10 @@
         <property name="appService" ref="appService"/>
     </bean>
 
+    <bean id="appCategorySequenceChangeController" class="com.changhong.system.web.controller.AppCategorySequenceChangeController">
+        <property name="appService" ref="appService"/>
+    </bean>
+
     <bean id="appTopicFormController" class="com.changhong.system.web.controller.AppTopicFormController">
         <property name="appService" ref="appService"/>
         <property name="fileRequestHost" value="${application.file.request.path}"/>
@@ -284,6 +292,15 @@
     <bean id="appMustManagementController" class="com.changhong.system.web.controller.AppMustManagementController">
         <property name="appService" ref="appService"/>
         <property name="fileRequestHost" value="${application.file.request.path}"/>
+    </bean>
+
+    <bean id="homePagePosterFormController" class="com.changhong.system.web.controller.HomePagePosterFormController">
+        <property name="appService" ref="appService"/>
+        <property name="fileRequestHost" value="${application.file.request.path}"/>
+    </bean>
+
+    <bean id="homePagePosterDeleteController" class="com.changhong.system.web.controller.HomePagePosterDeleteController">
+        <property name="appService" ref="appService"/>
     </bean>
 
     <!--客户端接口-->
@@ -358,7 +375,8 @@
         <property name="clientService" ref="clientService"/>
     </bean>
 
-
-
+    <bean id="clientHomePagePosterController" class="com.changhong.client.web.controller.ClientHomePagePosterController">
+        <property name="clientService" ref="clientService"/>
+    </bean>
 
 </beans>

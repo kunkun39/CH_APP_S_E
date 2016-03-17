@@ -46,6 +46,8 @@ public class LocalCacheServiceImpl implements CacheService {
 
     private ConcurrentLinkedHashMap<String, String> multipHosts =  new ConcurrentLinkedHashMap<String, String>(10);
 
+    private ConcurrentLinkedHashMap<String, HomePagePosterDTO> posterCache =  new ConcurrentLinkedHashMap<String, HomePagePosterDTO>(10);
+
     private String bootImageFileName = "initial.png";
 
     private int currentClientApkVersion = 1;
@@ -137,6 +139,15 @@ public class LocalCacheServiceImpl implements CacheService {
         }
         log.info("finish init multip host");
 
+        /**
+         * 首页海报
+         */
+        List<HomePagePoster> posters = appDao.loadAllHomePagePoster();
+        List<HomePagePosterDTO> posterDTOs = HomePagePosterWebAssember.toMarketAppDTOList(posters);
+        for (HomePagePosterDTO dto : posterDTOs) {
+            posterCache.put("POSTER_" + dto.getId(), dto);
+        }
+        log.info("finish init home page poster with objects count " + posterCache.size());
 
         long end = System.currentTimeMillis();
         long during = end - begin;
@@ -235,32 +246,10 @@ public class LocalCacheServiceImpl implements CacheService {
     }
 
     public List<MarketAppDTO> obtainCachedAppByCategoryId(int categoryId) {
-        List<String> idLists = new ArrayList<String>();
-
-        AppCategoryDTO get = null;
-        for (AppCategoryDTO loop : categoryCache.values()) {
-            int loopDategoryId = loop.getId();
-            if (loopDategoryId == categoryId) {
-                get = loop;
-                break;
-            }
-        }
-
-        if (get != null && get.getParentId() > 0) {
-            idLists.add(categoryId + "");
-        } else {
-            for (AppCategoryDTO loop : categoryCache.values()) {
-                int loopParentId = loop.getParentId();
-                if (loopParentId == categoryId) {
-                    idLists.add(loop.getId() + "");
-                }
-            }
-        }
-
         List<MarketAppDTO> apps = new ArrayList<MarketAppDTO>();
         for (MarketAppDTO dto : appCache.values()) {
             int loopCategoryId = dto.getCategoryId();
-            if (idLists.contains(loopCategoryId + "") && "PASSED".equals(dto.getStatus())) {
+            if (categoryId == loopCategoryId && "PASSED".equals(dto.getStatus())) {
                 apps.add(dto);
             }
         }
@@ -374,5 +363,21 @@ public class LocalCacheServiceImpl implements CacheService {
 
     public void setClientBeginUpdate(boolean clientBeginUpdate) {
         this.clientBeginUpdate = clientBeginUpdate;
+    }
+
+    /************************************首页海报************************************/
+
+    @Override
+    public void resetHomePagePoster(HomePagePosterDTO dto, boolean remove) {
+        if (remove) {
+            posterCache.remove("POSTER_" + dto.getId());
+        } else {
+            posterCache.put("POSTER_" + dto.getId(), dto);
+        }
+    }
+
+    @Override
+    public List<HomePagePosterDTO> obtainHomePagePoster() {
+        return new ArrayList<HomePagePosterDTO>(posterCache.values());
     }
 }

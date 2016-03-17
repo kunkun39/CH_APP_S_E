@@ -12,6 +12,8 @@ public class AppCategoryDTO implements Serializable {
 
     private int id;
 
+    private int sequence;
+
     private String categoryName;
 
     private int categoryIconId;
@@ -27,8 +29,9 @@ public class AppCategoryDTO implements Serializable {
     public AppCategoryDTO() {
     }
 
-    public AppCategoryDTO(int id, String categoryName, int parentId, int categoryIconId, String categoryIconName, boolean includeChild) {
+    public AppCategoryDTO(int id, int sequence, String categoryName, int parentId, int categoryIconId, String categoryIconName, boolean includeChild) {
         this.id = id;
+        this.sequence = sequence;
         this.categoryName = categoryName;
         this.parentId = parentId;
         this.categoryIconId = categoryIconId;
@@ -42,6 +45,14 @@ public class AppCategoryDTO implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
     }
 
     public String getCategoryName() {

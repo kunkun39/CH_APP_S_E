@@ -41,6 +41,8 @@ public class MemCacheServiceImpl implements CacheService, SyncCallBack {
 
     private final static String IS_UPDATE = "IS_UPDATE";
 
+    private final static String HOMEPAGE_POSTER = "POSTER_";
+
     @Autowired
     private AppDao appDao;
 
@@ -174,27 +176,11 @@ public class MemCacheServiceImpl implements CacheService, SyncCallBack {
     }
 
     public List<MarketAppDTO> obtainCachedAppByCategoryId(int categoryId) {
-        List<String> idLists = new ArrayList<String>();
-
-        AppCategoryDTO get = obtainObject(CATEGORY_APP + categoryId);
-
-        if (get != null && get.getParentId() > 0) {
-            idLists.add(categoryId + "");
-        } else {
-            List<AppCategoryDTO> categoryAppList = obtainObjects(CATEGORY_APP);
-            for (AppCategoryDTO loop : categoryAppList) {
-                int loopParentId = loop.getParentId();
-                if (loopParentId == categoryId) {
-                    idLists.add(loop.getId() + "");
-                }
-            }
-        }
-
         List<MarketAppDTO> apps = new ArrayList<MarketAppDTO>();
         List<MarketAppDTO> marketAppList = obtainObjects(MARKET_APP);
         for (MarketAppDTO dto : marketAppList) {
             int loopCategoryId = dto.getCategoryId();
-            if (idLists.contains(loopCategoryId + "") && "PASSED".equals(dto.getStatus())) {
+            if (categoryId == loopCategoryId && "PASSED".equals(dto.getStatus())) {
                 apps.add(dto);
             }
         }
@@ -349,6 +335,25 @@ public class MemCacheServiceImpl implements CacheService, SyncCallBack {
         CHMemcacheUtils.put(IS_UPDATE, clientBeginUpdate);
     }
 
+    /************************************首页海报************************************/
+    @Override
+    public void resetHomePagePoster(HomePagePosterDTO dto, boolean remove) {
+        if (remove) {
+            CHMemcacheUtils.remove(HOMEPAGE_POSTER + dto.getId());
+        } else {
+            CHMemcacheUtils.put(HOMEPAGE_POSTER + dto.getId(), dto);
+        }
+    }
+
+    @Override
+    public List<HomePagePosterDTO> obtainHomePagePoster() {
+        List<HomePagePosterDTO> list = obtainObjects(HOMEPAGE_POSTER);
+        if (CHListUtils.listIsEmpty(list)) {
+            list = null;
+        }
+        return list;
+    }
+
     /**
      * *********************************数据同步***********************************
      */
@@ -475,6 +480,16 @@ public class MemCacheServiceImpl implements CacheService, SyncCallBack {
             CHMemcacheUtils.put(MULTIP_HOST + host.getId(), DesUtils.getEncString(host.getHostName()));
         }
         log.info("finish init multip host");
+
+        /**
+         * 首页海报
+         */
+        List<HomePagePoster> posters = appDao.loadAllHomePagePoster();
+        List<HomePagePosterDTO> posterDTOs = HomePagePosterWebAssember.toMarketAppDTOList(posters);
+        for (HomePagePosterDTO dto : posterDTOs) {
+            CHMemcacheUtils.put(HOMEPAGE_POSTER + dto.getId(), dto);
+        }
+        log.info("finish init home page poster with objects count " + posterDTOs.size());
 
         log.info("updateMemCacheFromDB end!");
     }

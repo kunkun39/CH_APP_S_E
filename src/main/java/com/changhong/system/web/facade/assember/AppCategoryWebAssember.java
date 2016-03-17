@@ -37,6 +37,7 @@ public class AppCategoryWebAssember {
         final String categoryName = category.getCategoryName();
         AppCategory parent = category.getParent();
         final int parentId = parent == null ? -1 : parent.getId();
+        final int sequence = category.getSequence();
 
         int categoryIconId = -1;
         String categoryIconName = "";
@@ -52,7 +53,7 @@ public class AppCategoryWebAssember {
             includeChild = true;
         }
 
-        AppCategoryDTO dto =  new AppCategoryDTO(id, categoryName, parentId, categoryIconId, categoryIconName, includeChild);
+        AppCategoryDTO dto =  new AppCategoryDTO(id, sequence, categoryName, parentId, categoryIconId, categoryIconName, includeChild);
 
         if (includeChildren) {
             List<AppCategory> children = childrenD;

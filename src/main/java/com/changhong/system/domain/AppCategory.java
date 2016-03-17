@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class AppCategory extends EntityBase {
 
+    private int sequence;
+
     private String categoryName;
 
     private CategoryIcon categoryIcon;
@@ -103,6 +105,14 @@ public class AppCategory extends EntityBase {
     }
 
     /****************************************************GET/SET*******************************************************/
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
 
     public String getCategoryName() {
         return categoryName;

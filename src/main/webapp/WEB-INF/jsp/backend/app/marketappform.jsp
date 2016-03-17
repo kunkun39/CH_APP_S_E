@@ -148,6 +148,16 @@
                         <spring-form:errors path="appFullName" cssClass="help-inline"/>
                     </div>
                 </div>
+
+                <div class="control-group">
+                    <label class="control-label">SubTitle [Required]</label>
+
+                    <div class="controls">
+                        <spring-form:input path="appSubTitle" maxlength="40" cssStyle="height: 30px;"/>&nbsp;
+                        <spring-form:errors path="appSubTitle" cssClass="help-inline"/>
+                    </div>
+                </div>
+
                 <div class="control-group">
                     <label class="control-label">Scores [Required]</label>
 
@@ -195,13 +205,7 @@
                     <div class="controls">
                         <select id="selectCategoryId" name="selectCategoryId" style="height: 30px;">
                             <c:forEach items="${categories}" var="category">
-                                <option value="${category.id}" disabled="">${category.categoryName}</option>
-                                <c:forEach items="${category.children}" var="child" varStatus="counter">
-                                    <option value="${child.id}"
-                                            <c:if test="${child.id==app.categoryId}">selected="true"</c:if>>
-                                        [${counter.count}] ${category.categoryName}
-                                        -> ${child.categoryName}</option>
-                                </c:forEach>
+                                <option value="${category.id}" <c:if test="${child.id==app.categoryId}">selected="true"</c:if>>${category.categoryName}</option>
                             </c:forEach>
                         </select>
                     </div>

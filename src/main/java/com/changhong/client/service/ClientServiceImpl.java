@@ -96,8 +96,9 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 JSONObject single = new JSONObject();
                 single.put(ClientInfoProperties.CATEGORY_ID, value.getId() + "");
                 single.put(ClientInfoProperties.CATEGORY_NAME, value.getCategoryName());
-                single.put(ClientInfoProperties.CATEGORY_PARENTID, value.getParentId());
-                single.put(ClientInfoProperties.CATEGORY_FILENAME, value.getCategoryIconName());
+                single.put(ClientInfoProperties.CATEGORY_SEQUENCE, value.getSequence());
+                //single.put(ClientInfoProperties.CATEGORY_PARENTID, value.getParentId());
+                //single.put(ClientInfoProperties.CATEGORY_FILENAME, value.getCategoryIconName());
 
                 //向array集合里添加一个元素
                 array.add(single);
@@ -180,6 +181,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
                 single.put(ClientInfoProperties.APP_RECOMMEND, dto.isRecommend());
                 single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+                single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+                single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
                 all.add(single);
             }
         }
@@ -236,6 +239,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             app.put(ClientInfoProperties.APP_APK_FILEPATH, dto.getApkActualFileName());
             app.put(ClientInfoProperties.APP_POSTER_FILEPATH, dto.getPosterActualFileName());
             app.put(ClientInfoProperties.APP_CATEGORY_ID, dto.getCategoryId());
+            app.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+            app.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
 
             boolean vip = dto.isVip();
             app.put(ClientInfoProperties.APP_IS_VIP, vip);
@@ -273,6 +278,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             single.put(ClientInfoProperties.APP_KEY, dto.getAppKey());
             single.put(ClientInfoProperties.APP_RECOMMEND, dto.isRecommend());
             single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
             array.add(single);
         }
         all.put("values", array);
@@ -297,6 +304,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
                 single.put(ClientInfoProperties.APP_RECOMMEND, dto.isRecommend());
                 single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+                single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+                single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
                 all.add(single);
             }
         }
@@ -323,6 +332,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
             single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
             single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
             newestArray.add(single);
         }
         all.put("NEWEST", newestArray);
@@ -597,6 +608,31 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
         //batchingInsertService.insertBackupAppHistory(new AppBackupHistory(boxMac, appIds, 0));
         clientDao.insertBackupAppHistory(new AppBackupHistory(boxMac, appIds, AppBackupHistory.BACKUP));
         values.put("requestbackupapps", all);
+        return values.toJSONString();
+    }
+
+    @Override
+    public String obtainHomePagePosters() {
+        List<HomePagePosterDTO> posters = cacheService.obtainHomePagePoster();
+
+        JSONObject values = new JSONObject();
+        values.put("host", decideWhichHost());
+
+        JSONArray all = new JSONArray();
+
+        if (CHListUtils.hasElement(posters)) {
+            for (HomePagePosterDTO dto : posters) {
+                if (StringUtils.hasText(dto.getPosterActualFileName())) {
+                    JSONObject single = new JSONObject();
+                    single.put(ClientInfoProperties.HOMEPAGE_POSTER_ID, dto.getId());
+                    single.put(ClientInfoProperties.HOMEPAGE_POSTER_FILEPATH, dto.getPosterActualFileName());
+                    all.add(single);
+                }
+            }
+        }
+
+        values.put("values", all);
+
         return values.toJSONString();
     }
 }

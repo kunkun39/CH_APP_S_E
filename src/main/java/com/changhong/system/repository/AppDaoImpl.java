@@ -1,6 +1,7 @@
 package com.changhong.system.repository;
 
 import com.changhong.common.repository.HibernateEntityObjectDao;
+import com.changhong.common.utils.CHListUtils;
 import com.changhong.common.utils.CHStringUtils;
 import com.changhong.system.domain.*;
 import org.hibernate.Query;
@@ -27,12 +28,36 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
     }
 
     public List<AppCategory> loadAllFirstLevelCategory() {
-        return getHibernateTemplate().find("from AppCategory a where a.parent is NULL");
+        return getHibernateTemplate().find("from AppCategory a where a.parent is NULL order by a.sequence asc");
     }
 
     public int loadCategoryApps(int categoryId) {
         int size = ((Long)getHibernateTemplate().find("select count(m.id) from MarketApp m where m.appCategory.id = ?", new Object[]{categoryId}).get(0)).intValue();
         return size;
+    }
+
+    @Override
+    public AppCategory loadAppCategory(int sequence, String method) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("select c from AppCategory c");
+        if ("up".equals(method)) {
+            builder.append(" where c.sequence < " + sequence + " order by sequence desc");
+        } else if ("down".equals(method)) {
+            builder.append(" where c.sequence > " + sequence + " order by sequence asc");
+        }
+
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(builder.toString());
+        query.setMaxResults(1);
+        query.setFirstResult(0);
+
+        List<AppCategory> appCategories = query.list();
+        if (CHListUtils.hasElement(appCategories)) {
+            return appCategories.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**************************************专题部分****************************************/
@@ -55,19 +80,6 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
     }
 
     public List<MarketApp> loadMarketApps(String appName, int categoryId, int topicId, int groupId, String appStatus, int startPosition, int pageSize) {
-        boolean isIn = false;
-        List<Integer> ids = new ArrayList<Integer>();
-        if (categoryId > 0) {
-            AppCategory category = (AppCategory) getHibernateTemplate().find("from AppCategory a where a.id = " + categoryId).get(0);
-            if (category.getParent() == null) {
-                isIn = true;
-                List<AppCategory> below = category.getAllCategoryBelow();
-                for (AppCategory appCategory : below) {
-                    ids.add(appCategory.getId());
-                }
-            }
-        }
-
         StringBuilder builder = new StringBuilder();
         builder.append("select m from MarketApp m");
         if (topicId > 0) {
@@ -82,11 +94,7 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
             builder.append(" and m.appName like '%" + convertAppName + "%' or m.pinYingShort like '%" + convertAppName + "%' or m.pinYingFull like '%" + convertAppName + "%'");
         }
         if (categoryId > 0) {
-            if (isIn) {
-                builder.append(" and m.appCategory.id in (" + CHStringUtils.convertListToSQLIn(ids) + ")");
-            } else {
-                builder.append(" and m.appCategory.id = " + categoryId);
-            }
+            builder.append(" and m.appCategory.id = " + categoryId);
         }
         if (!appStatus.equals("ALL")) {
             builder.append(" and m.appStatus = '" + appStatus + "'");
@@ -110,19 +118,6 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
     }
 
     public int loadMarketAppSize(String appName, int categoryId, int topicId, int groupId, String appStatus) {
-        boolean isIn = false;
-        List<Integer> ids = new ArrayList<Integer>();
-        if (categoryId > 0) {
-            AppCategory category = (AppCategory) getHibernateTemplate().find("from AppCategory a where a.id = " + categoryId).get(0);
-            if (category.getParent() == null) {
-                isIn = true;
-                List<AppCategory> below = category.getAllCategoryBelow();
-                for (AppCategory appCategory : below) {
-                    ids.add(appCategory.getId());
-                }
-            }
-        }
-
         StringBuilder builder = new StringBuilder();
         builder.append("select count(m.id) from MarketApp m");
         if (topicId > 0) {
@@ -137,11 +132,7 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
             builder.append(" and m.appName like '%" + convertAppName + "%' or m.pinYingShort like '%" + convertAppName +  "%' or m.pinYingFull like '%" + convertAppName + "%'");
         }
         if (categoryId > 0) {
-            if (isIn) {
-                builder.append(" and m.appCategory.id in (" + CHStringUtils.convertListToSQLIn(ids) + ")");
-            } else {
-                builder.append(" and m.appCategory.id = " + categoryId);
-            }
+            builder.append(" and m.appCategory.id = " + categoryId);
         }
         if (!appStatus.equals("ALL")) {
             builder.append(" and m.appStatus = '" + appStatus + "'");
@@ -181,19 +172,6 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
     public List<MarketApp> loadRecommendApps(int categoryId, String appName) {
         List<MarketApp> apps = new ArrayList<MarketApp>();
 
-        boolean isIn = false;
-        List<Integer> ids = new ArrayList<Integer>();
-        if (categoryId > 0) {
-            AppCategory category = (AppCategory) getHibernateTemplate().find("from AppCategory a where a.id = " + categoryId).get(0);
-            if (category.getParent() == null) {
-                isIn = true;
-                List<AppCategory> below = category.getAllCategoryBelow();
-                for (AppCategory appCategory : below) {
-                    ids.add(appCategory.getId());
-                }
-            }
-        }
-
         StringBuilder builder = new StringBuilder();
         builder.append("from MarketApp m where 1=1");
         if (StringUtils.hasText(appName)) {
@@ -201,11 +179,7 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
             builder.append(" and (m.appName like '%" + appName + "%' or m.pinYingShort like '%" + convert + "%' or m.pinYingFull like '%" + convert + "%')");
         }
         if (categoryId > 0) {
-            if (isIn) {
-                builder.append(" and m.appCategory.id in (" + CHStringUtils.convertListToSQLIn(ids) + ")");
-            } else {
-                builder.append(" and m.appCategory.id = " + categoryId);
-            }
+            builder.append(" and m.appCategory.id = " + categoryId);
         }
         builder.append(" and m.appStatus = 'PASSED' order by m.downloadTimes desc");
 
@@ -275,5 +249,10 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
     public boolean isAppMustSet(int appId) {
         int size = ((Long)getHibernateTemplate().find("select count(id) from AppMust a where a.marketApp.id = ?", new Object[]{appId}).get(0)).intValue();
         return size > 0 ? true : false;
+    }
+    /************************************首页海报************************************/
+    @Override
+    public List<HomePagePoster> loadAllHomePagePoster() {
+        return getHibernateTemplate().find("from HomePagePoster");
     }
 }

@@ -60,9 +60,6 @@
                           <option value="-1">All</option>
                           <c:forEach items="${categories}" var="category">
                             <option value="${category.id}">${category.categoryName}</option>
-                            <c:forEach items="${category.children}" var="child" varStatus="counter">
-                                <option value="${child.id}">[${counter.count}] ${category.categoryName} -> ${child.categoryName}</option>
-                            </c:forEach>
                           </c:forEach>
                       </select>
                       &nbsp;&nbsp;&nbsp;&nbsp;
@@ -103,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="row-fluid">
+            <div id="app_pie_chat" class="row-fluid">
                 <div class="span6">
                     <div class="widget-box">
                         <div class="widget-title">
@@ -138,7 +135,12 @@
         var sta_year = jQuery("#sta_year").val();
         var sta_month = jQuery("#sta_month").val();
         renew_column_container(categoryId, sta_year, sta_month);
-        renew_pie_container(categoryId, sta_year, sta_month);
+        if (categoryId == -1) {
+            jQuery("#app_pie_chat").css("display","block");
+            renew_pie_container(categoryId, sta_year, sta_month);
+        } else {
+            jQuery("#app_pie_chat").css("display","none");
+        }
     }
 
     function renew_column_container(categoryId, year, month) {

@@ -18,6 +18,8 @@ public class MarketAppDTO implements Serializable {
 
     private String appFullName;
 
+    private String appSubTitle;
+
     private String appDescription;
 
     private String appNote;
@@ -66,6 +68,8 @@ public class MarketAppDTO implements Serializable {
 
     private String updateDate;
 
+    private String releaseDate;
+
     private String pinYingShort;
 
     private String pinYingFull;
@@ -92,17 +96,18 @@ public class MarketAppDTO implements Serializable {
         this.appScores = 8;
     }
 
-    public MarketAppDTO(int id, String appKey, String appName, String appDescription, String appNote, String appVersionInt, String appVersion, String appPackage,
+    public MarketAppDTO(int id, String appKey, String appName, String appSubTitle, String appDescription, String appNote, String appVersionInt, String appVersion, String appPackage,
                         int appScores, int downloadTimes, String appSize, String status, String statusName, boolean recommend,
                         int categoryId, String categoryName, String fullCategoryName,
                         int appIconId, String iconActualFileName, String iconFakeFileName,
                         int appFileId, String apkActualFileName, String apkFakeFileName,
                         int appPosterId, String posterActualFileName, String posterFakeFileName,
-                        String updateDate, String pinYingShort, String pinYingFull,
+                        String updateDate, String releaseDate, String pinYingShort, String pinYingFull,
                         List<AppTopicDTO> topics, boolean vip, List<VipGroupDTO> groups) {
         this.id = id;
         this.appKey = appKey;
         this.appFullName = appName;
+        this.appSubTitle = appSubTitle;
         this.appDescription = appDescription;
         this.appNote = appNote;
         this.appVersionInt = appVersionInt;
@@ -127,6 +132,7 @@ public class MarketAppDTO implements Serializable {
         this.posterActualFileName = posterActualFileName;
         this.posterFakeFileName = posterFakeFileName;
         this.updateDate = updateDate;
+        this.releaseDate = releaseDate;
         this.pinYingShort = pinYingShort;
         this.pinYingFull = pinYingFull;
 
@@ -172,6 +178,14 @@ public class MarketAppDTO implements Serializable {
 
     public void setAppFullName(String appFullName) {
         this.appFullName = appFullName;
+    }
+
+    public String getAppSubTitle() {
+        return appSubTitle;
+    }
+
+    public void setAppSubTitle(String appSubTitle) {
+        this.appSubTitle = appSubTitle;
     }
 
     public String getAppDescription() {
@@ -364,6 +378,14 @@ public class MarketAppDTO implements Serializable {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public MultipartFile getIconFile() {
