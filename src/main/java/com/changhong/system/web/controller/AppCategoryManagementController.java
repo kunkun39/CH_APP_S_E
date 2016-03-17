@@ -28,12 +28,12 @@ public class AppCategoryManagementController extends AbstractController {
 
         List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(false);
         model.put("categories", categories);
-        if (categories.size() > 1) {
+        if (categories.size() > 0) {
             model.put("sequence_min", categories.get(0).getSequence());
             model.put("sequence_max", categories.get(categories.size() - 1).getSequence());
         } else {
-            model.put("sequence_min", categories.get(0).getSequence());
-            model.put("sequence_max", categories.get(0).getSequence());
+            model.put("sequence_min", 0);
+            model.put("sequence_max", 0);
         }
         model.put("fileRequestHost", fileRequestHost);
         return new ModelAndView("backend/app/appcategorymanage", model);

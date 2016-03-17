@@ -359,4 +359,31 @@ CREATE TABLE `app_vipgroup_link` (
   FOREIGN KEY (`vip_group_id`) REFERENCES vip_group (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+ALTER TABLE `app_category` ADD COLUMN `sequence` int(11) DEFAULT NULL;
+ALTER TABLE `market_app` ADD COLUMN `releasetime` datetime DEFAULT NULL;
+ALTER TABLE `market_app` ADD COLUMN `app_subtitle` varchar(120) COLLATE utf8_bin DEFAULT NULL;
+
+DROP TABLE IF EXISTS `homepage_poster`;
+CREATE TABLE `homepage_poster` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `upload_filename` varchar(100) COLLATE utf8_bin DEFAULT '',
+  `actual_filename` varchar(20) COLLATE utf8_bin DEFAULT '',
+  `actual_filepath` varchar(20) COLLATE utf8_bin DEFAULT '',
+  `upload_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TRIGGER IF EXISTS `set_sequence_trigger`;
+DELIMITER ;;
+CREATE TRIGGER `set_sequence_trigger` BEFORE INSERT ON `app_category` FOR EACH ROW begin
+    declare max_sequence int;
+    set max_sequence = (select max(sequence) from app_category);
+    if( max_sequence is null ) then
+         set max_sequence = 0;
+    end if;
+    set new.sequence = max_sequence + 1;
+end
+;;
+DELIMITER ;
+
 SET FOREIGN_KEY_CHECKS=1;

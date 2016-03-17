@@ -58,3 +58,9 @@ INSERT INTO `box_page_recommend` VALUES (51, '2014-04-01 00:00:00', 3, 12, NULL,
 INSERT INTO `box_page_recommend` VALUES (53, '2014-04-01 00:00:00', 4, 10, NULL, NULL);
 INSERT INTO `box_page_recommend` VALUES (54, '2014-04-01 00:00:00', 4, 11, NULL, NULL);
 INSERT INTO `box_page_recommend` VALUES (55, '2014-04-01 00:00:00', 4, 12, NULL, NULL);
+
+INSERT INTO `homepage_poster` VALUES (1,'2016-03-15 06:25:42', '', '', '', NULL);
+INSERT INTO `homepage_poster` VALUES (2,'2016-03-15 06:26:48', '', '', '', NULL);
+INSERT INTO `homepage_poster` VALUES (3,'2016-03-15 06:26:50', '', '', '', NULL);
+INSERT INTO `homepage_poster` VALUES (4,'2016-03-15 06:26:51', '', '', '', NULL);
+INSERT INTO `homepage_poster` VALUES (5,'2016-03-15 06:26:53', '', '', '', NULL);
