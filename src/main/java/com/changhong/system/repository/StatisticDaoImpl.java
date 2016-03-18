@@ -32,22 +32,7 @@ public class StatisticDaoImpl extends HibernateEntityObjectDao implements Statis
         //生成种类的查询条件
         String categorySQL = "";
         if (categoryId > 0) {
-            boolean equal = false;
-            SQLQuery query = session.createSQLQuery("select id from app_category where parent_id is null");
-            List list = query.list();
-            for (Object o : list) {
-                Integer parentCategoryId = (Integer) o;
-                if (parentCategoryId == categoryId) {
-                    equal = true;
-                     break;
-                }
-            }
-
-            if (equal) {
-                categorySQL = " and app_father_category_id = " + categoryId;
-            } else {
-                categorySQL = " and app_category_id = " + categoryId;
-            }
+            categorySQL = " and app_category_id = " + categoryId;
         }
 
         //按月统计
@@ -142,29 +127,12 @@ public class StatisticDaoImpl extends HibernateEntityObjectDao implements Statis
         String categorySQL = "";
         String groupCategorySQL = "";
         if (categoryId > 0) {
-            boolean equal = false;
-            SQLQuery query = session.createSQLQuery("select id from app_category where parent_id is null");
-            List list = query.list();
-            for (Object o : list) {
-                Integer parentCategoryId = (Integer) o;
-                if (parentCategoryId == categoryId) {
-                    equal = true;
-                    break;
-                }
-            }
-
-            if (equal) {
-                selectColumn = " app_category_id ";
-                categorySQL = " and app_father_category_id = " + categoryId;
-                groupCategorySQL = " group by app_category_id";
-            } else {
-                selectColumn = " app_category_id ";
-                categorySQL = " and app_category_id = " + categoryId;
-                groupCategorySQL = " group by app_category_id";
-            }
+            selectColumn = " app_category_id ";
+            categorySQL = " and app_category_id = " + categoryId;
+            groupCategorySQL = " group by app_category_id";
         } else {
-            selectColumn = " app_father_category_id ";
-            groupCategorySQL = " group by app_father_category_id";
+            selectColumn = " app_category_id ";
+            groupCategorySQL = " group by app_category_id";
         }
 
         if (month > 0) {
