@@ -208,6 +208,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
                 single.put(ClientInfoProperties.APP_RECOMMEND, dto.isRecommend());
                 single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+                single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+                single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
                 all.add(single);
             }
         }
@@ -352,6 +354,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
             single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
             single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
             hotestArray.add(single);
         }
         all.put("HOTEST", hotestArray);
@@ -370,6 +374,8 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
             single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
             single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
             fastestArray.add(single);
         }
         all.put("FASTEST", fastestArray);
