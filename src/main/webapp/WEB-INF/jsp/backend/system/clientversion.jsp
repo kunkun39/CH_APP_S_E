@@ -65,7 +65,7 @@
                                 <label class="control-label">New Version of APK File [Required]</label>
                                 <div class="controls">
                                     <input type="file" id="clientApkUploadFile" name="clientApkUploadFile"/>&nbsp;
-                                    <span id="clientApk_help" class="help-inline" for="required" style="display:none">The upload file is empty or the file name is not GDAppStore.ap</span>
+                                    <span id="clientApk_help" class="help-inline" for="required" style="display:none">The upload file is empty or the file name is not GDAppStore.apk</span>
                                     <c:if test="${apkFileExist}">
                                         <br/>
                                         <br/>

@@ -6,6 +6,7 @@ import com.changhong.system.domain.*;
 import com.changhong.system.web.facade.dto.AppTopicDTO;
 import com.changhong.system.web.facade.dto.MarketAppDTO;
 import com.changhong.system.web.facade.dto.VipGroupDTO;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,11 @@ public class MarketAppWebAssember {
         final String posterFakeFileName = posterFile.getUploadFileName();
 
         final String updateDate = CHDateUtils.getSimpleDateFormat(marketApp.getTimestamp());
-        final String releaseDate = marketApp.getReleaseTime().toString("yyyy-MM-dd HH:mm:ss");
+        DateTime releaseDateTime = marketApp.getReleaseTime();
+        String releaseDate = null;
+        if (releaseDateTime != null) {
+            releaseDate = releaseDateTime.toString("yyyy-MM-dd HH:mm:ss");
+        }
         final String pinyingShort = marketApp.getPinYingShort();
         final String pinyingFull = marketApp.getPinYingFull();
 

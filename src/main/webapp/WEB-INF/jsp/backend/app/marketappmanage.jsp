@@ -64,21 +64,6 @@
                           </c:forEach>
                       </select>
                       &nbsp;
-                      App Topic:<select name="topicId" style="height: 30px;">
-                          <option value="-1" <c:if test="${-1==paging.topicId}">selected="true"</c:if>>All</option>
-                          <c:forEach items="${topics}" var="topic">
-                            <option value="${topic.id}" <c:if test="${topic.id==paging.topicId}">selected="true"</c:if>>${topic.topicName}</option>
-                          </c:forEach>
-                      </select>
-                      &nbsp;
-                      &nbsp;
-                      Vip Group:<select name="groupId" style="height: 30px;">
-                          <option value="-1" <c:if test="${-1==paging.groupId}">selected="true"</c:if>>All</option>
-                          <c:forEach items="${groups}" var="group">
-                            <option value="${group.id}" <c:if test="${group.id==paging.groupId}">selected="true"</c:if>>${group.groupName}</option>
-                          </c:forEach>
-                      </select>
-                      &nbsp;
                       App Name:<input type="text" name="appName" class="text" value="${paging.appName}" style="height: 25px;"/>
                       &nbsp;
                      <i id="app_search_button" class="icon icon-search" style="cursor: pointer" onclick="jQuery('#app_search_form').submit();"></i>
@@ -146,28 +131,15 @@
                                 <span class="user-info">
                                     <span style="font-weight:bold">Name</span>: ${app.appFullName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">SubTitle</span>: ${app.appSubTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="font-weight:bold">Version</span>: ${app.appVersion}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight:bold">Status</span>: ${app.statusName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <br/>
                                     <span style="font-weight:bold">Category</span>: ${app.fullCategoryName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight:bold">Version</span>: ${app.appVersion}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight:bold">Scores</span>: ${app.appScores} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Size</span>: ${app.appSize}M&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                                     <br/>
-                                    <span style="font-weight:bold">Status</span>: ${app.statusName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="font-weight:bold">Update Time</span>: ${app.updateDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="font-weight:bold">Scores</span>: ${app.appScores} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                    <br/>
                                     <span style="font-weight:bold">Download Times</span>: ${app.downloadTimes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <c:if test="${app.recommend}">
-                                        <span style="font-weight:bold;">Recommend</span>:Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </c:if>
-                                    <c:if test="${!app.recommend}">
-                                        <span style="font-weight:bold;">Recommend</span>:No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </c:if>
-                                    <c:if test="${app.vip}">
-                                        <span style="font-weight:bold;">Vip</span>:Yes
-                                    </c:if>
-                                    <c:if test="${!app.vip}">
-                                        <span style="font-weight:bold;">Vip</span>:No
-                                    </c:if>
                                     <br/>
                                     <span style="font-weight:bold">Description</span>: ${app.appDescription}
                                     <br/>

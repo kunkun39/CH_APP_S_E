@@ -193,13 +193,6 @@
                     <%--</div>--%>
                 <%--</div>--%>
                 <div class="control-group">
-                    <label class="control-label">Recommend</label>
-
-                    <div class="controls">
-                        <spring-form:checkbox path="recommend" cssStyle="height:30px;"/>&nbsp;
-                    </div>
-                </div>
-                <div class="control-group">
                     <label class="control-label">Category [Required]</label>
 
                     <div class="controls">
@@ -208,69 +201,6 @@
                                 <option value="${category.id}" <c:if test="${child.id==app.categoryId}">selected="true"</c:if>>${category.categoryName}</option>
                             </c:forEach>
                         </select>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">Topic</label>
-                    <input type="hidden" id="add_topics" name="addTopics" value="${app.topicIds}"/>
-                    <input type="hidden" id="delete_topics" name="deleteTopics" value=""/>
-
-                    <div class="controls">
-                        <select id="selectTopicId" name="selectTopicId" style="height: 30px;">
-                            <c:forEach items="${topics}" var="topic">
-                                <option value="${topic.id}">${topic.topicName}</option>
-                            </c:forEach>
-                        </select>
-                        <a href="javascript:void(0);" onclick="appendAppTopic()"
-                           class="btn btn-warning btn-mini">Add to Topic</a>
-                        <br/>
-                        <br/>
-
-                        <div id="exist_topics">
-                            <c:forEach items="${app.topics}" var="topic">
-                                <div id="topic_exist_${topic.id}">
-                                        ${topic.topicName} <a href="#" onclick="deleteAppTopic('${topic.id}')"
-                                                              class="btn btn-danger btn-mini">Delete from Topic</a> <br/>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">Vip</label>
-
-                    <div class="controls">
-                        <spring-form:checkbox id="vip" path="vip" cssStyle="height:30px;" onclick="checkVipShow();"/>&nbsp;
-                    </div>
-                </div>
-
-                <div id="div_vip_group" class="control-group" style="display: none;">
-                    <label class="control-label">Vip Groups</label>
-                    <input type="hidden" id="add_groups" name="addGroups" value="${app.groupIds}"/>
-                    <input type="hidden" id="delete_groups" name="deleteGroups" value=""/>
-
-                    <div class="controls">
-                        <select id="selectGroupId" name="selectTopicId" style="height: 30px;">
-                            <c:forEach items="${groups}" var="group">
-                                <option value="${group.id}">${group.groupName}</option>
-                            </c:forEach>
-                        </select>
-                        <c:if test="${fn:length(groups) > 0}">
-                            <a href="javascript:void(0);" onclick="appendGroup()"
-                               class="btn btn-warning btn-mini">Set Vip Group</a>
-                        </c:if>
-                        <br/>
-                        <br/>
-                        <div id="exist_groups">
-                            <c:forEach items="${app.groups}" var="group">
-                                <div id="group_exist_${group.id}">
-                                        ${group.groupName} <a href="#" onclick="deleteGroup('${group.id}')"
-                                                              class="btn btn-danger btn-mini">Delete Vip Group</a> <br/>
-                                </div>
-                            </c:forEach>
-                        </div>
                     </div>
                 </div>
 
