@@ -6,6 +6,7 @@ import com.changhong.client.service.CacheService;
 import com.changhong.common.domain.EntityBase;
 import com.changhong.common.exception.CHAppExistException;
 import com.changhong.common.exception.CHApplicationException;
+import com.changhong.common.utils.CHListUtils;
 import com.changhong.common.utils.SecurityUtils;
 import com.changhong.system.domain.*;
 import com.changhong.system.repository.AppDao;
@@ -119,6 +120,17 @@ public class AppServiceImpl implements AppService {
                 cacheService.resetAppCategoryInCache(AppCategoryWebAssember.toAppCategoryDTO(category_change, false), false);
             }
         }
+    }
+
+    @Override
+    public boolean validateCategoryNameDuplicate(String categoryName) {
+        if (StringUtils.hasText(categoryName)) {
+            List<AppCategory> appCategories = appDao.loadAppCategoryByName(categoryName);
+            if (CHListUtils.hasElement(appCategories)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**************************************专题部分****************************************/

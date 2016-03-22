@@ -130,7 +130,7 @@
 
 	});
 	function openCategoryDialog(id, method) {
-		settings.source = '${pageContext.request.contextPath}/backend/appcategoryform.html?categoryId=' + id + '&method=' + method;
+		settings.source = '${pageContext.request.contextPath}/backend/appcategoryform.html?categoryId=' + id + '&method=' + method + '&time=' + new Date().valueOf();
 		openModalPopup(settings);
 	}
 
@@ -152,6 +152,9 @@
         var categoryId = jQuery("#categoryId").val();
         var categoryName = jQuery("#categoryName").val();
         var oldParentId = jQuery("#oldParentId").val();
+
+        jQuery("#categoryName_duplicate").css("display", "none");
+
         if(categoryName == null || categoryName == '') {
             jQuery("#categoryName_help").css("display", "block");
             return;
@@ -159,39 +162,13 @@
             jQuery("#categoryName_help").css("display", "none");
         }
 
-        if(categoryId <= 0 && parentId > 0) {
-            var categoryIconName = jQuery("#categoryIconName").val();
-            if(categoryIconName == null || categoryIconName == '') {
-                jQuery("#categoryIcon_help").css("display", "block");
-                return;
+        SystemDWRHandler.validateCategoryNameDuplicate(categoryName, function(result){
+            if (result) {
+                jQuery("#categoryName_duplicate").css("display", "block");
             } else {
-                if(!isImage(categoryIconName)) {
-                    jQuery("#categoryIcon_format_help").css("display", "block");
-                    return;
-                }
+                form.submit();
             }
-        }  else if(categoryId > 0 && parentId >=0 && oldParentId <= 0) {
-            var categoryIconName = jQuery("#categoryIconName").val();
-            if(categoryIconName == null || categoryIconName == '') {
-                jQuery("#categoryIcon_help").css("display", "block");
-                return;
-            } else {
-                if(!isImage(categoryIconName)) {
-                    jQuery("#categoryIcon_format_help").css("display", "block");
-                    return;
-                }
-            }
-        } else {
-            var categoryIconName = jQuery("#categoryIconName").val();
-            if(categoryIconName != null && categoryIconName != '') {
-                if(!isImage(categoryIconName)) {
-                    jQuery("#categoryIcon_format_help").css("display", "block");
-                    return;
-                }
-            }
-        }
-
-        form.submit();
+        });
     }
 
     function isImage(url) {

@@ -93,4 +93,7 @@ public class SystemDWRHandler {
         return userService.obtainMemberAlreadyAddInGroup(groupId, boxMac.toLowerCase());
     }
 
+    public boolean validateCategoryNameDuplicate(String categoryName) {
+        return appService.validateCategoryNameDuplicate(categoryName);
+    }
 }

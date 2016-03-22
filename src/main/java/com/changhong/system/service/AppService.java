@@ -32,6 +32,8 @@ public interface AppService {
 
     void changeCategorySequence(int categoryId, String method);
 
+    boolean validateCategoryNameDuplicate(String categoryName);
+
     /**************************************专题部分****************************************/
 
     List<AppTopicDTO> obtainAllTopics();

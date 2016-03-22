@@ -28,6 +28,13 @@ public interface AppDao extends EntityObjectDao {
      */
     AppCategory loadAppCategory(int sequence, String method);
 
+    /**
+     * 通过categoryName查找AppCategory
+     * @param categoryName
+     * @return
+     */
+    List<AppCategory> loadAppCategoryByName(String categoryName);
+
     /**************************************专题部分****************************************/
 
     List<AppTopic> loadAllTopics();

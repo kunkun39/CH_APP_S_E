@@ -60,6 +60,21 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
         }
     }
 
+    @Override
+    public List loadAppCategoryByName(String categoryName) {
+        List<AppCategory> appCategoryList = null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("from AppCategory c");
+        if (StringUtils.hasText(categoryName)) {
+            builder.append(" where lower(c.categoryName) = ? ");
+            appCategoryList = getHibernateTemplate().find(builder.toString(), new Object[]{categoryName.toLowerCase()});
+        } else {
+            appCategoryList = getHibernateTemplate().find(builder.toString());
+        }
+
+        return appCategoryList;
+    }
+
     /**************************************专题部分****************************************/
 
     public List<AppTopic> loadAllTopics() {

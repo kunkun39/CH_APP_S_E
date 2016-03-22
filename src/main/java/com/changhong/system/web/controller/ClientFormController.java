@@ -54,7 +54,7 @@ public class ClientFormController extends SimpleFormController {
         }
 
         String macTo = ServletRequestUtils.getStringParameter(request, "macTo", "");
-        if (!StringUtils.hasText(macFrom)) {
+        if (!StringUtils.hasText(macTo)) {
             errors.rejectValue("macTo", "client.mac.empty");
         } else {
             String[] tokens = StringUtils.delimitedListToStringArray(macTo, ":");

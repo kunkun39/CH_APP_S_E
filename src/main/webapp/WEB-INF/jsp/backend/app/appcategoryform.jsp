@@ -26,6 +26,7 @@
                             <div class="controls">
                                 <input type="text" id="categoryName" name="categoryName" class="span20" value="${category.categoryName}"/>
                                 <span id="categoryName_help" class="help-block" style="display: none;">The category name field not allowed to be empty</span>
+                                <span id="categoryName_duplicate" class="help-block" style="display: none;">This category name is repeated</span>
                             </div>
                         </div>
                         <div class="form-actions">
