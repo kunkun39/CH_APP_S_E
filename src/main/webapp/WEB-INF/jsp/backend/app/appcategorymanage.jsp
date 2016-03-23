@@ -57,14 +57,16 @@
             <table class="table table-bordered data-table">
                 <thead>
                     <tr>
+                        <th width="5%" style="text-align: center">Index</th>
                         <th width="50%" class="tbl_paddingleft">Category Name</th>
-                        <th width="20%" class="tbl_paddingleft">Move</th>
+                        <th width="15%" class="tbl_paddingleft">Move</th>
                         <th class="tbl_paddingleft">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${categories}" var="category">
+                    <c:forEach items="${categories}" var="category" varStatus="status">
                         <tr class="gradeX">
+                            <td style="text-align: center">${status.count}</td>
                             <td class="tbl_paddingleft">${category.categoryName}</td>
                             <td class="tbl_paddingleft">
                                 <c:if test="${sequence_min != category.sequence}">

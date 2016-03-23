@@ -32,6 +32,7 @@ public class MarketAppWebAssember {
             app.setAppDescription(dto.getAppDescription());
             app.setAppNote(dto.getAppNote());
             app.setAppScores(dto.getAppScores());
+            app.setAppSubTitle(dto.getAppSubTitle());
             app.setRecommend(dto.isRecommend());
         } else {
             app = new MarketApp(dto.getAppFullName().trim(), dto.getAppSubTitle(), dto.getAppDescription(), dto.getAppNote(), dto.getAppScores(), dto.isRecommend());

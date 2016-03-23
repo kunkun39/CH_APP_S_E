@@ -198,7 +198,7 @@
                     <div class="controls">
                         <select id="selectCategoryId" name="selectCategoryId" style="height: 30px;">
                             <c:forEach items="${categories}" var="category">
-                                <option value="${category.id}" <c:if test="${child.id==app.categoryId}">selected="true"</c:if>>${category.categoryName}</option>
+                                <option value="${category.id}" <c:if test="${category.id==app.categoryId}">selected="true"</c:if>>${category.categoryName}</option>
                             </c:forEach>
                         </select>
                     </div>

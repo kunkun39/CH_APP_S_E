@@ -631,7 +631,7 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 if (StringUtils.hasText(dto.getPosterActualFileName())) {
                     JSONObject single = new JSONObject();
                     single.put(ClientInfoProperties.HOMEPAGE_POSTER_ID, dto.getId());
-                    single.put(ClientInfoProperties.HOMEPAGE_POSTER_FILEPATH, dto.getPosterActualFileName());
+                    single.put(ClientInfoProperties.HOMEPAGE_POSTER_FILEPATH, "/homepageposter/" + dto.getPosterActualFileName());
                     all.add(single);
                 }
             }

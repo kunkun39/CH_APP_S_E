@@ -44,19 +44,19 @@ public class DomainHelper {
                 history.addChangeDetails(details);
             }
             */
-            if (app.isRecommend() != dto.isRecommend()) {
-                AppChangeDetails details = new AppChangeDetails("App Recommend", "Change recommend status");
-                history.addChangeDetails(details);
-            }
+//            if (app.isRecommend() != dto.isRecommend()) {
+//                AppChangeDetails details = new AppChangeDetails("App Recommend", "Change recommend status");
+//                history.addChangeDetails(details);
+//            }
             if (app.getAppCategory().getId() != dto.getCategoryId()) {
                 AppCategory oldCategory = (AppCategory) EntityLoadHolder.getUserDao().findById(dto.getCategoryId(), AppCategory.class);
                 AppChangeDetails details = new AppChangeDetails("App Category", app.getAppCategory().getCategoryName() + " -> " + oldCategory.getCategoryName());
                 history.addChangeDetails(details);
             }
-            if (!dto.getAddTopics().equals(dto.getTopicIds())) {
-                AppChangeDetails details = new AppChangeDetails("App Topic", "Change app topic");
-                history.addChangeDetails(details);
-            }
+//            if (!dto.getAddTopics().equals(dto.getTopicIds())) {
+//                AppChangeDetails details = new AppChangeDetails("App Topic", "Change app topic");
+//                history.addChangeDetails(details);
+//            }
             if (dto.getIconFile() != null && dto.getIconFile().getSize() > 0) {
                 AppChangeDetails details = new AppChangeDetails("App ICON", "upload new icon file");
                 history.addChangeDetails(details);
