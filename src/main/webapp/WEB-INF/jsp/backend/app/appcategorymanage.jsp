@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/maruti-media.css" class="skin-color" />
     <script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/js/maruti.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/engine.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/util.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/interface/SystemDWRHandler.js" type="text/javascript"></script>
@@ -108,22 +107,23 @@
 </div>
 
 <script>
+    var settings = {
+        align : 'center',									//Valid values, left, right, center
+        top : 50, 											//Use an integer (in pixels)
+        width : 600, 										//Use an integer (in pixels)
+        padding : 10,										//Use an integer (in pixels)
+        backgroundColor : 'white', 						    //Use any hex code
+        source : '', 				    					//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
+        borderColor : '#333333', 							//Use any hex code
+        borderWeight : 4,									//Use an integer (in pixels)
+        borderRadius : 5, 									//Use an integer (in pixels)
+        fadeOutTime : 300, 									//Use any integer, 0 : no fade
+        disableColor : '#666666', 							//Use any hex code
+        disableOpacity : 40, 								//Valid range 0-100
+        loadingImage : '${pageContext.request.contextPath}/js/popup/loading.gif'
+    };
     jQuery(function() {
-		settings = {
-			align : 'center',									//Valid values, left, right, center
-			top : 50, 											//Use an integer (in pixels)
-			width : 600, 										//Use an integer (in pixels)
-			padding : 10,										//Use an integer (in pixels)
-	        backgroundColor : 'white', 						    //Use any hex code
-	        source : '', 				    					//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
-	        borderColor : '#333333', 							//Use any hex code
-	        borderWeight : 4,									//Use an integer (in pixels)
-	        borderRadius : 5, 									//Use an integer (in pixels)
-	        fadeOutTime : 300, 									//Use any integer, 0 : no fade
-	        disableColor : '#666666', 							//Use any hex code
-	        disableOpacity : 40, 								//Valid range 0-100
-	        loadingImage : '${pageContext.request.contextPath}/js/popup/loading.gif'
-		};
+
 		jQuery(document).keyup(function(event) {
 			if (event.keyCode == 27) {
 				closePopup(settings.fadeOutTime);

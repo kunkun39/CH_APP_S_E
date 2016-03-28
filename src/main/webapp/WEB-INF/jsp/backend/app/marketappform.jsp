@@ -25,6 +25,11 @@
             type="text/javascript"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui-1.8.22.custom.css"
           type="text/css"/>
+    <style type="text/css">
+        .grey {
+            color : #999999;
+        }
+    </style>
 
     <script type="text/javascript">
         jQuery(function() {
@@ -63,24 +68,24 @@
         $(function() {
             jQuery.fn.raty.defaults.path = '${pageContext.request.contextPath}/js/jquery-raty/img';
             jQuery('#function-score').raty({
-                        number: 10,//多少个星星设置
-                        score: ${app.appScores},//初始值是设置
-                        targetType: 'number',//类型选择，number是数字值，hint，是设置的数组值
-                        path      : '${pageContext.request.contextPath}/js/jquery-raty/img',
-                        cancelOff : 'cancel-off-big.png',
-                        cancelOn  : 'cancel-on-big.png',
-                        size      : 30,
-                        starHalf  : 'star-half-big.png',
-                        starOff   : 'star-off-big.png',
-                        starOn    : 'star-on-big.png',
-                        target    : '#function-hint',
-                        cancel    : false,
-                        targetKeep: true,
-                        precision : false,//是否包含小数
-                        click: function(score, evt) {
-                            jQuery("#appScore").val(score);
-                        }
-                    });
+                number: 10,//多少个星星设置
+                score: ${app.appScores},//初始值是设置
+                targetType: 'number',//类型选择，number是数字值，hint，是设置的数组值
+                path      : '${pageContext.request.contextPath}/js/jquery-raty/img',
+                cancelOff : 'cancel-off-big.png',
+                cancelOn  : 'cancel-on-big.png',
+                size      : 30,
+                starHalf  : 'star-half-big.png',
+                starOff   : 'star-off-big.png',
+                starOn    : 'star-on-big.png',
+                target    : '#function-hint',
+                cancel    : false,
+                targetKeep: true,
+                precision : false,//是否包含小数
+                click: function(score, evt) {
+                    jQuery("#appScore").val(score);
+                }
+            });
         });
     </script>
 </head>
@@ -283,19 +288,19 @@
                         <label class="control-label">Other Info</label>
 
                         <div class="controls">
-                            <input class="span3" placeholder="Package: ${app.appPackage}" readonly="true"/>&nbsp;
-                            <input class="span3" placeholder="Version Name: ${app.appVersionInt}" readonly="true"/>&nbsp;
-                            <input class="span3" placeholder="Version Code: ${app.appVersion}" readonly="true"/>&nbsp;
-                            <input class="span3" placeholder="Size: ${app.appSize}M" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Package: ${app.appPackage}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Version Name: ${app.appVersionInt}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Version Code: ${app.appVersion}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Size: ${app.appSize}M" readonly="true"/>&nbsp;
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">&nbsp;</label>
 
                         <div class="controls">
-                            <input class="span3" placeholder="Download Times: ${app.downloadTimes}" readonly="true"/>&nbsp;
-                            <input class="span3" placeholder="Status: ${app.statusName}" readonly="true"/>&nbsp;
-                            <input class="span3" placeholder="Update Time:${app.updateDate}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Download Times: ${app.downloadTimes}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Status: ${app.statusName}" readonly="true"/>&nbsp;
+                            <input class="span3 grey" value="Update Time:${app.updateDate}" readonly="true"/>&nbsp;
                         </div>
                     </div>
                     <div class="control-group">

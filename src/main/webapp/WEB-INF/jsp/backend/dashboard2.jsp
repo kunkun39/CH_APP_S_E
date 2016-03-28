@@ -13,7 +13,6 @@
 
     <script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/js/maruti.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/engine.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/util.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/dwr/interface/SystemDWRHandler.js" type="text/javascript"></script>
@@ -114,22 +113,23 @@
 </div>
 <script type="text/javascript">
     var homePagePosterValidate = false;
+    var settings = {
+        align : 'center',									//Valid values, left, right, center
+        top : 50, 											//Use an integer (in pixels)
+        width : 600, 										//Use an integer (in pixels)
+        padding : 10,										//Use an integer (in pixels)
+        backgroundColor : 'white', 						    //Use any hex code
+        source : '', 				    					//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
+        borderColor : '#333333', 							//Use any hex code
+        borderWeight : 4,									//Use an integer (in pixels)
+        borderRadius : 5, 									//Use an integer (in pixels)
+        fadeOutTime : 300, 									//Use any integer, 0 : no fade
+        disableColor : '#666666', 							//Use any hex code
+        disableOpacity : 40, 								//Valid range 0-100
+        loadingImage : '${pageContext.request.contextPath}/js/popup/loading.gif'
+    };
+
     jQuery(function() {
-        settings = {
-            align : 'center',									//Valid values, left, right, center
-            top : 50, 											//Use an integer (in pixels)
-            width : 600, 										//Use an integer (in pixels)
-            padding : 10,										//Use an integer (in pixels)
-            backgroundColor : 'white', 						    //Use any hex code
-            source : '', 				    					//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
-            borderColor : '#333333', 							//Use any hex code
-            borderWeight : 4,									//Use an integer (in pixels)
-            borderRadius : 5, 									//Use an integer (in pixels)
-            fadeOutTime : 300, 									//Use any integer, 0 : no fade
-            disableColor : '#666666', 							//Use any hex code
-            disableOpacity : 40, 								//Valid range 0-100
-            loadingImage : '${pageContext.request.contextPath}/js/popup/loading.gif'
-        };
         jQuery(document).keyup(function(event) {
             if (event.keyCode == 27) {
                 closePopup(settings.fadeOutTime);
@@ -139,52 +139,9 @@
     });
 
     function openPosterUploadDialog(id) {
-        settings.source = '${pageContext.request.contextPath}/backend/homepageposterform.html?id=' + id;
-        openModalPopup(settings);
+        window.location.href = '${pageContext.request.contextPath}/backend/homepageposterform.html?id=' + id;
     }
-    function openModalPopup(obj) {
-        modalPopup(obj.align, obj.top, obj.width, obj.padding, obj.disableColor, obj.disableOpacity, obj.backgroundColor, obj.borderColor, obj.borderWeight, obj.borderRadius, obj.fadeOutTime, obj.source, obj.loadingImage);
-    }
-
-    function validatePosterImage(obj) {
-        var url,size;
-        if ($.support.msie) {
-            url = obj.value;
-        } else {
-            url = window.URL.createObjectURL(obj.files[0]);
-        }
-
-        var posterFile = jQuery("#posterFile");
-        var posterFileName = posterFile.val();
-
-        if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(posterFileName)) {
-            jQuery("#poster_error_show").html("picture format should be JPG, JEPG, PNG, please reselect the picture");
-            jQuery("#poster_error_show").css("display", "block");
-            homePagePosterValidate = false;
-        } else {
-            jQuery("#view_image").attr("src", url).load(function() {
-                size = obj.files[0].size;
-                if (size > 50 * 1024) {
-                    jQuery("#poster_error_show").html("picture size should be less than 50K");
-                    jQuery("#poster_error_show").css("display", "block");
-                    homePagePosterValidate = false;
-                } else {
-                    jQuery("#poster_error_show").css("display", "none");
-                    homePagePosterValidate = true;
-                }
-            });
-        }
-    }
-
-    function saveHomePagePoster(form) {
-        if (homePagePosterValidate == true) {
-            form.submit();
-        } else {
-            jQuery("#poster_error_show").html("The picture is not validated");
-            jQuery("#poster_error_show").css("display", "block");
-        }
-    }
-
+    
     function posterDeleteConfirm(id) {
         jQuery("#poster_delete_dialog").css("visibility", "visible");
         jQuery("#poster_delete_dialog").dialog({
@@ -193,10 +150,10 @@
             width:300,
             modal: true,
             buttons: {
-                "确  认": function() {
+                "Confirm": function() {
                     window.location.href = "${pageContext.request.contextPath}/backend/homepageposterdelete.html?id=" + id;
                 },
-                "取  消": function() {
+                "Cancel": function() {
                     jQuery("#poster_delete_dialog").css("visibility", "hidden");
                     jQuery(this).dialog("close");
                 }
