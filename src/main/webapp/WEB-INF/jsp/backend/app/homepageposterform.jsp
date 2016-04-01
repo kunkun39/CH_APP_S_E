@@ -68,7 +68,7 @@
                                 </div>
                             </c:if>
                             <div class="form-actions">
-                                <button type="button" class="btn btn-success" onclick="closePopup(settings.fadeOutTime);">Cancel</button>
+                                <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/backend/dashboard.html';">Cancel</button>
                                 <button type="button" class="btn btn-success" onclick="saveHomePagePoster(this.form);">Save</button>
                             </div>
                             <img id="view_image" src="" style="display: none;"/>

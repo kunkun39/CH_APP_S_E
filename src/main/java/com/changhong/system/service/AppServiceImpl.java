@@ -201,7 +201,11 @@ public class AppServiceImpl implements AppService {
 
     public MarketAppDTO obtainMarketAppById(int marketAppId) {
         MarketApp app = (MarketApp) appDao.findById(marketAppId, MarketApp.class);
-        return MarketAppWebAssember.toMarketAppDTO(app);
+        if (app != null) {
+            return MarketAppWebAssember.toMarketAppDTO(app);
+        } else {
+            return null;
+        }
     }
 
     public int saveOrUpdateMarketApp(MarketAppDTO appDTO) throws Exception {

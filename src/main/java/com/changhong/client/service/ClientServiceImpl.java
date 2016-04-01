@@ -320,25 +320,25 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
         JSONObject all = new JSONObject();
         all.put("host", decideWhichHost());
 
-        //获得最新的APPS
-        JSONArray newestArray = new JSONArray();
-        List<HashMap> newest = clientDao.loadRankList(1);
-        for (HashMap hashMap : newest) {
-            int appId = (Integer) hashMap.get("id");
-            MarketAppDTO dto = cacheService.obtainMarketAppInCache(appId);
-            JSONObject single = new JSONObject();
-            single.put(ClientInfoProperties.APP_ID, dto.getId());
-            single.put(ClientInfoProperties.APP_NAME, dto.getAppFullName());
-            single.put(ClientInfoProperties.APP_KEY, dto.getAppKey());
-            single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
-            single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
-            single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
-            single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
-            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
-            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
-            newestArray.add(single);
-        }
-        all.put("NEWEST", newestArray);
+//        //获得最新的APPS
+//        JSONArray newestArray = new JSONArray();
+//        List<HashMap> newest = clientDao.loadRankList(1);
+//        for (HashMap hashMap : newest) {
+//            int appId = (Integer) hashMap.get("id");
+//            MarketAppDTO dto = cacheService.obtainMarketAppInCache(appId);
+//            JSONObject single = new JSONObject();
+//            single.put(ClientInfoProperties.APP_ID, dto.getId());
+//            single.put(ClientInfoProperties.APP_NAME, dto.getAppFullName());
+//            single.put(ClientInfoProperties.APP_KEY, dto.getAppKey());
+//            single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
+//            single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
+//            single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
+//            single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+//            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+//            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
+//            newestArray.add(single);
+//        }
+//        all.put("NEWEST", newestArray);
 
         //获得最热的APPS
         JSONArray hotestArray = new JSONArray();
@@ -358,27 +358,27 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
             single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
             hotestArray.add(single);
         }
-        all.put("HOTEST", hotestArray);
+        all.put("POPULAR", hotestArray);
 
-        //获得最快增长的APPS
-        JSONArray fastestArray = new JSONArray();
-        List<HashMap> fastest = clientDao.loadRankList(3);
-        for (HashMap hashMap : fastest) {
-            int appId = (Integer) hashMap.get("app_id");
-            MarketAppDTO dto = cacheService.obtainMarketAppInCache(appId);
-            JSONObject single = new JSONObject();
-             single.put(ClientInfoProperties.APP_ID, dto.getId());
-            single.put(ClientInfoProperties.APP_NAME, dto.getAppFullName());
-            single.put(ClientInfoProperties.APP_KEY, dto.getAppKey());
-            single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
-            single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
-            single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
-            single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
-            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
-            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
-            fastestArray.add(single);
-        }
-        all.put("FASTEST", fastestArray);
+//        //获得最快增长的APPS
+//        JSONArray fastestArray = new JSONArray();
+//        List<HashMap> fastest = clientDao.loadRankList(3);
+//        for (HashMap hashMap : fastest) {
+//            int appId = (Integer) hashMap.get("app_id");
+//            MarketAppDTO dto = cacheService.obtainMarketAppInCache(appId);
+//            JSONObject single = new JSONObject();
+//             single.put(ClientInfoProperties.APP_ID, dto.getId());
+//            single.put(ClientInfoProperties.APP_NAME, dto.getAppFullName());
+//            single.put(ClientInfoProperties.APP_KEY, dto.getAppKey());
+//            single.put(ClientInfoProperties.APP_SCORES, dto.getAppScores());
+//            single.put(ClientInfoProperties.APP_DOWNLOAD, dto.getDownloadTimes());
+//            single.put(ClientInfoProperties.APP_SIZE, dto.getAppSize());
+//            single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
+//            single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
+//            single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
+//            fastestArray.add(single);
+//        }
+//        all.put("FASTEST", fastestArray);
 
         return all.toJSONString();
     }

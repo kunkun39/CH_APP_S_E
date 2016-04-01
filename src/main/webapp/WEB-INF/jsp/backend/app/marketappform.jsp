@@ -307,7 +307,7 @@
                         <label class="control-label">&nbsp;</label>
 
                         <div class="controls">
-                            <input class="span6" placeholder="Box search keywords[case-insensitive]: '${app.pinYingShort}' or '${app.pinYingFull}'"
+                            <input class="span6 grey" value="Box search keywords[case-insensitive]: '${app.pinYingShort}' or '${app.pinYingFull}'"
                                    readonly="true"/>&nbsp;
                         </div>
                     </div>

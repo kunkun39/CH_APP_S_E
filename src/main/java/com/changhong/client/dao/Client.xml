@@ -27,7 +27,7 @@
    </select>
 
     <select id="selectHotestApps"  resultClass="java.util.HashMap">
-       select id from market_app where app_status = 'PASSED' order by download_times desc limit 10
+       select id from market_app where app_status = 'PASSED' order by download_times desc limit 12
    </select>
 
     <select id="selectFastestApps"  resultClass="java.util.HashMap">
