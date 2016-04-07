@@ -57,7 +57,7 @@
 
         });
         function openHistoryModel(id) {
-            settings.source = '${pageContext.request.contextPath}/backend/apphistory.html?appId=' + id;
+            settings.source = '${pageContext.request.contextPath}/backend/apphistory.html?appId=' + id + '&time=' + new Date().valueOf();
             openModalPopup(settings);
         }
 

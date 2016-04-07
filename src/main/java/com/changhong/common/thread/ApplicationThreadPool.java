@@ -23,7 +23,7 @@ public class ApplicationThreadPool implements InitializingBean {
         pool.initialize();
     }
 
-    public void executeThread(Thread thread) {
+    public static void executeThread(Thread thread) {
         pool.execute(thread);
     }
 

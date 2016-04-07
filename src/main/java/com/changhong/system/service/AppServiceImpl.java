@@ -74,6 +74,7 @@ public class AppServiceImpl implements AppService {
 
         //reset the cache
         AppCategoryDTO dto = AppCategoryWebAssember.toAppCategoryDTO(category, false);
+        dto.setSequence(category.getId());
         cacheService.resetAppCategoryInCache(dto, false);
     }
 

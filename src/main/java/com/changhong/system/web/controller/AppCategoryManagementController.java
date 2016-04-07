@@ -1,5 +1,6 @@
 package com.changhong.system.web.controller;
 
+import com.changhong.client.service.CacheService;
 import com.changhong.system.service.AppService;
 import com.changhong.system.web.facade.dto.AppCategoryDTO;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +21,10 @@ public class AppCategoryManagementController extends AbstractController {
 
     private AppService appService;
 
+    private CacheService cacheService;
+
     private String fileRequestHost;
+
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -35,12 +39,18 @@ public class AppCategoryManagementController extends AbstractController {
             model.put("sequence_min", 0);
             model.put("sequence_max", 0);
         }
+
+        cacheService.resetAppCategoryInCache(categories.get(categories.size() - 1), false);
         model.put("fileRequestHost", fileRequestHost);
         return new ModelAndView("backend/app/appcategorymanage", model);
     }
 
     public void setAppService(AppService appService) {
         this.appService = appService;
+    }
+
+    public void setCacheService(CacheService cacheService) {
+        this.cacheService = cacheService;
     }
 
     public void setFileRequestHost(String fileRequestHost) {

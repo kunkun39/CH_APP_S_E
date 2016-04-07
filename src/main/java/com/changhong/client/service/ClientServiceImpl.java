@@ -183,6 +183,7 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
                 single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
                 single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
+                single.put(ClientInfoProperties.APP_PACKAGE, dto.getAppPackage());
                 all.add(single);
             }
         }
@@ -308,6 +309,7 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_ICON_FILEPATH, dto.getIconActualFileName());
                 single.put(ClientInfoProperties.SUB_TITLE, dto.getAppSubTitle());
                 single.put(ClientInfoProperties.RELEASE_TIME, dto.getReleaseDate());
+                single.put(ClientInfoProperties.APP_PACKAGE, dto.getAppPackage());
                 all.add(single);
             }
         }

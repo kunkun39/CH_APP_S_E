@@ -219,6 +219,7 @@
 
     <bean id="appCategoryManagementController" class="com.changhong.system.web.controller.AppCategoryManagementController">
         <property name="appService" ref="appService"/>
+        <property name="cacheService" ref="cacheService"/>
         <property name="fileRequestHost" value="${application.file.request.path}"/>
     </bean>
 
