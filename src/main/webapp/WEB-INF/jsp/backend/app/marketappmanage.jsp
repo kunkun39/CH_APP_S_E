@@ -139,7 +139,7 @@
                                     <span style="font-weight:bold">Size</span>: ${app.appSize}M&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                                     <br/>
                                     <c:if test="${app.status == 'PASSED'}">
-                                        <span style="font-weight:bold">Public Time</span>: ${app.releaseDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span style="font-weight:bold">Publish Time</span>: ${app.releaseDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </c:if>
                                     <span style="font-weight:bold">Download Times</span>: ${app.downloadTimes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <br/>
