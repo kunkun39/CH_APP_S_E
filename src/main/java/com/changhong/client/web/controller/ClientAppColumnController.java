@@ -22,9 +22,8 @@ public class ClientAppColumnController extends AbstractController {
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int categoryId = ServletRequestUtils.getIntParameter(request, "categoryId", -1);
         String responseJSON = "";
-        if (categoryId > 0) {
-            responseJSON = clientService.obtainCategoryApps(categoryId);
-        }
+
+        responseJSON = clientService.obtainCategoryApps(categoryId);
 
         //返回结果
         response.setContentType("application/json; charset=utf-8");

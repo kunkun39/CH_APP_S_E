@@ -35,12 +35,12 @@ public class AppCategoryManagementController extends AbstractController {
         if (categories.size() > 0) {
             model.put("sequence_min", categories.get(0).getSequence());
             model.put("sequence_max", categories.get(categories.size() - 1).getSequence());
+            cacheService.resetAppCategoryInCache(categories.get(categories.size() - 1), false);
         } else {
             model.put("sequence_min", 0);
             model.put("sequence_max", 0);
         }
 
-        cacheService.resetAppCategoryInCache(categories.get(categories.size() - 1), false);
         model.put("fileRequestHost", fileRequestHost);
         return new ModelAndView("backend/app/appcategorymanage", model);
     }
