@@ -289,7 +289,7 @@ public class AppServiceImpl implements AppService {
         MarketApp app = (MarketApp) appDao.findById(marketAppId, MarketApp.class);
 
         // 更新发布时间
-        if (app.getAppStatus() == AppStatus.CREAETED && AppStatus.PASSED.name().equals(resetStatus)) {
+        if (AppStatus.PASSED.name().equals(resetStatus)) {
             app.setReleaseTime(new DateTime());
         }
         AppChangeHistory history = DomainHelper.generateStatusChangeHistory(app, app.getAppStatus().name(), resetStatus);

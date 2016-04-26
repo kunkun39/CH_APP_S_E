@@ -249,7 +249,7 @@ public class LocalCacheServiceImpl implements CacheService {
         List<MarketAppDTO> apps = new ArrayList<MarketAppDTO>();
         for (MarketAppDTO dto : appCache.values()) {
             int loopCategoryId = dto.getCategoryId();
-            if (categoryId == loopCategoryId && "PASSED".equals(dto.getStatus())) {
+            if ((categoryId == loopCategoryId || categoryId == -1) && "PASSED".equals(dto.getStatus())) {
                 apps.add(dto);
             }
         }

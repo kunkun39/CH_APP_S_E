@@ -180,7 +180,7 @@ public class MemCacheServiceImpl implements CacheService, SyncCallBack {
         List<MarketAppDTO> marketAppList = obtainObjects(MARKET_APP);
         for (MarketAppDTO dto : marketAppList) {
             int loopCategoryId = dto.getCategoryId();
-            if (categoryId == loopCategoryId && "PASSED".equals(dto.getStatus())) {
+            if ((categoryId == loopCategoryId || categoryId == -1) && "PASSED".equals(dto.getStatus())) {
                 apps.add(dto);
             }
         }
