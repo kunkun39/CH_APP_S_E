@@ -68,7 +68,9 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a style="font-size: 13px" href="${pageContext.request.contextPath}/backend/dashboard.html" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a style="font-size: 13px" href="javascript:void(0);" class="current">System User Management</a> </div>
+    <div id="breadcrumb">
+        <a style="font-size: 13px" href="${pageContext.request.contextPath}/backend/dashboard.html" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a style="font-size: 13px" href="javascript:void(0);" class="current">System User Management</a>
+    </div>
   </div>
 
   <%--<div  class="quick-actions_homepage">--%>
@@ -84,10 +86,11 @@
         <div class="widget-box">
           <div class="widget-title" style="padding-top: 2px;">
             <form id="user_search_form" action="${pageContext.request.contextPath}/backend/useroverview.html" method="POST">
-                <a href="${pageContext.request.contextPath}/backend/userform.html"><span class="icon"><i class="icon-plus"></i></span></a>
+                <a href="javascript:void(0);"><span class="icon"><i class="icon-tasks"></i></span></a>
                 <h5>Name:</h5> <input type="text" name="filername" class="text" value="${paging.name}" style="height: 25px;"/>
                 &nbsp;
                 <i class="icon icon-search" onclick="jQuery('#user_search_form').submit();"></i>
+                 <div class="buttons"><a href="${pageContext.request.contextPath}/backend/userform.html" class="btn btn-mini"><i class="icon-plus"></i> Add User</a></div>
             </form>
           </div>
 

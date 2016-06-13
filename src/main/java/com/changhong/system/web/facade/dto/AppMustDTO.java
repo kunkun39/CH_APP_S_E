@@ -11,7 +11,7 @@ public class AppMustDTO implements Serializable {
 
     private int id;
 
-    private boolean install;
+    private String appMustType;
 
     private int appId;
 
@@ -32,10 +32,10 @@ public class AppMustDTO implements Serializable {
     public AppMustDTO() {
     }
 
-    public AppMustDTO(int id, boolean install, int appId, String appName, String appVersion, int appVersionInt, String appKey, String iconActualFileName,
+    public AppMustDTO(int id, String appMustType, int appId, String appName, String appVersion, int appVersionInt, String appKey, String iconActualFileName,
                       String packageName, String apkActualFileName) {
         this.id = id;
-        this.install = install;
+        this.appMustType = appMustType;
         this.appId = appId;
         this.appName = appName;
         this.appVersion = appVersion;
@@ -54,12 +54,12 @@ public class AppMustDTO implements Serializable {
         this.id = id;
     }
 
-    public boolean isInstall() {
-        return install;
+    public String getAppMustType() {
+        return appMustType;
     }
 
-    public void setInstall(boolean install) {
-        this.install = install;
+    public void setAppMustType(String appMustType) {
+        this.appMustType = appMustType;
     }
 
     public int getAppId() {

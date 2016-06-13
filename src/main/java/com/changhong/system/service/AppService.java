@@ -88,9 +88,9 @@ public interface AppService {
 
     /************************************应用强制升级和卸载************************************/
 
-    List<AppMustDTO> obtainAppMust(boolean install);
+    List<AppMustDTO> obtainAppMust(String appMustType);
 
-    String updateAppMust(int appId, boolean install);
+    String updateAppMust(int appId, String appMustType);
 
     void deleteAppMust(int appMustId);
 

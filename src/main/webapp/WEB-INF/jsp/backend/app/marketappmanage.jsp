@@ -41,8 +41,9 @@
       <div class="span12">
 
           <div class="widget-box">
-          <div class="widget-title"><a href="${pageContext.request.contextPath}/backend/marketappform.html?appName=${paging.appName}&categoryId=${paging.categoryId}&appStatus=${paging.appStatus}"><span class="icon"> <i class="icon-plus"></i> </span></a>
+          <div class="widget-title"><a href="javascript:void(0);"><span class="icon"> <i class="icon-tasks"></i> </span></a>
             <h5>App Info Management</h5>
+              <div class="buttons"><a href="${pageContext.request.contextPath}/backend/marketappform.html?appName=${paging.appName}&categoryId=${paging.categoryId}&appStatus=${paging.appStatus}" class="btn btn-mini"><i class="icon-plus"></i> Add App</a></div>
           </div>
 
           <div class="widget-content">

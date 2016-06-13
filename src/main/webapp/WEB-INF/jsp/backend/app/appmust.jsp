@@ -179,7 +179,7 @@
                     jQuery("#recommend-dialog-confirm").css("visibility", "hidden");
                     jQuery(this).dialog("close");
 
-                    SystemDWRHandler.updateAppMust(appId, ${install}, function(result) {
+                    SystemDWRHandler.updateAppMust(appId, '${appMustType}', function(result) {
                         if(result == null) {
                             return;
                         } else {
@@ -238,7 +238,7 @@
                     jQuery(this).dialog("close");
 
                     SystemDWRHandler.deleteAppMust(appMustId, function(result) {
-                        window.location.href = "${pageContext.request.contextPath}/backend/appmust.html?install=${install}";
+                        window.location.href = "${pageContext.request.contextPath}/backend/appmust.html?appMustType=${appMustType}";
                     });
                 },
                 "Cancel": function() {

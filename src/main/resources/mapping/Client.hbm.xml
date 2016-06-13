@@ -56,7 +56,13 @@
             <generator class="increment"/>
         </id>
         <property name="timestamp" column="timestamp" type="java.util.Date"/>
-        <property name="install" column="install" insert="true" update="true" type="java.lang.Boolean"/>
+
+        <property name="appMustType" column="must_type">
+            <type name="com.changhong.common.domain.EnumConverter">
+                <param name="enumClassName">com.changhong.system.domain.AppMustType</param>
+            </type>
+        </property>
+
         <many-to-one name="marketApp" column="app_id" class="com.changhong.system.domain.MarketApp" lazy="proxy" cascade="none" insert="true" update="true"/>
     </class>
 

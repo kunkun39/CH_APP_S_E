@@ -119,10 +119,11 @@
           <div class="widget-title" style="padding-top: 2px;">
             <form id="user_search_form" action="${pageContext.request.contextPath}/backend/clientoverview.html" method="POST">
                 <%--<a href="#" onclick="openClientImportDialog();"><span class="icon"><i class="icon-forward"></i></span></a>--%>
-                <a href="${pageContext.request.contextPath}/backend/clientform.html"><span class="icon"><i class="icon-plus"></i></span></a>
+                <a href="javascript:void(0);"><span class="icon"><i class="icon-tasks"></i></span></a>
                 <h5>STB MAC:</h5> <input type="text" name="filername" class="text" value="${paging.contactName}" style="height: 25px;"/>
                 &nbsp;
                 <i class="icon icon-search" onclick="jQuery('#user_search_form').submit();"></i>
+                <div class="buttons"><a href="${pageContext.request.contextPath}/backend/clientform.html" class="btn btn-mini"><i class="icon-plus"></i> Add STB Mac</a></div>
             </form>
           </div>
 

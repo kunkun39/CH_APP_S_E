@@ -75,7 +75,7 @@ public interface AppDao extends EntityObjectDao {
 
     List<AppMust> loadAllAppMust();
 
-    List<AppMust> loadAppMust(boolean install);
+    List<AppMust> loadAppMust(String appMustType);
 
     boolean isAppMustSet(int appId);
 

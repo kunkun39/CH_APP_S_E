@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.InputStream;
+
 @Service("systemDWRHandler")
 public class SystemDWRHandler {
 
@@ -77,8 +79,8 @@ public class SystemDWRHandler {
         }
     }
 
-    public String updateAppMust(int appId, boolean install) {
-        return appService.updateAppMust(appId, install);
+    public String updateAppMust(int appId, String appMustType) {
+        return appService.updateAppMust(appId, appMustType);
     }
 
     public void deleteAppMust(int appMustId) {
@@ -95,5 +97,17 @@ public class SystemDWRHandler {
 
     public boolean validateCategoryNameDuplicate(String categoryName) {
         return appService.validateCategoryNameDuplicate(categoryName);
+    }
+
+    public boolean validateFileSize(InputStream fileStream) {
+        try {
+            int available = fileStream.available();
+            if (available > (50 * 1024)) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

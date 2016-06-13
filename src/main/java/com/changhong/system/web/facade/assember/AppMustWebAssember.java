@@ -16,7 +16,7 @@ public class AppMustWebAssember {
 
     public static AppMustDTO toAppMustDTODTO(AppMust appMust) {
         final int id = appMust.getId();
-        final boolean install = appMust.isInstall();
+        final String appMustType = appMust.getAppMustType().name();
         MarketApp app = appMust.getMarketApp();
         final int appId = app.getId();
         final String appKey = app.getAppKey();
@@ -27,7 +27,7 @@ public class AppMustWebAssember {
         final String packageName = app.getAppPackage();
         final String apkActualFileName = app.getAppFile().getActualFileName();
 
-        return new AppMustDTO(id, install, appId, appName, appVersion, appVersionInt, appKey, iconActualFileName, packageName, apkActualFileName);
+        return new AppMustDTO(id, appMustType, appId, appName, appVersion, appVersionInt, appKey, iconActualFileName, packageName, apkActualFileName);
     }
 
     public static List<AppMustDTO> toAppMustDTOList(List<AppMust> appMusts) {

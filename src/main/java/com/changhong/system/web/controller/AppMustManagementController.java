@@ -1,5 +1,6 @@
 package com.changhong.system.web.controller;
 
+import com.changhong.system.domain.AppMustType;
 import com.changhong.system.service.AppService;
 import com.changhong.system.web.facade.dto.AppCategoryDTO;
 import com.changhong.system.web.facade.dto.AppMustDTO;
@@ -27,18 +28,20 @@ public class AppMustManagementController extends AbstractController {
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        boolean install = ServletRequestUtils.getBooleanParameter(request, "install", true);
+        String appMustType = ServletRequestUtils.getStringParameter(request, "appMustType", "INSTALL");
         Map<String, Object> model = new HashMap<String, Object>();
         List<AppCategoryDTO> categories = appService.obtainAllFirstLevelCategory(true);
         model.put("categories", categories);
 
-        List<AppMustDTO> appMusts = appService.obtainAppMust(install);
+        List<AppMustDTO> appMusts = appService.obtainAppMust(appMustType);
         model.put("appMusts", appMusts);
 
         model.put("fileRequestHost", fileRequestHost);
-        model.put("install", install);
-        if (install) {
+        model.put("appMustType", appMustType);
+        if (appMustType.equals(AppMustType.INSTALL.name())) {
             model.put("pageName", "Force Install");
+        } else if (appMustType.equals(AppMustType.UPDATE.name())) {
+            model.put("pageName", "Force Update");
         } else {
             model.put("pageName", "Force Uninstall");
         }

@@ -23,7 +23,7 @@ public class ClientDaoImpl extends IbatisEntityObjectDao implements ClientDao {
 
     public boolean loadMacCanAccess(String boxMac) {
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("boxMac", boxMac);
+        parameters.put("boxMac", boxMac.toLowerCase());
         HashMap counter = (HashMap) getSqlMapClientTemplate().queryForList("Client.selectMacMatchList", parameters).get(0);
         Long has = (Long) counter.get("counter");
         return has > 0;

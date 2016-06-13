@@ -519,12 +519,12 @@ public class AppServiceImpl implements AppService {
 
     /************************************应用强制升级和卸载************************************/
 
-    public List<AppMustDTO> obtainAppMust(boolean install) {
-        List<AppMust> appMusts = appDao.loadAppMust(install);
+    public List<AppMustDTO> obtainAppMust(String appMustType) {
+        List<AppMust> appMusts = appDao.loadAppMust(appMustType);
         return AppMustWebAssember.toAppMustDTOList(appMusts);
     }
 
-    public String updateAppMust(int appId, boolean install) {
+    public String updateAppMust(int appId, String appMustType) {
         try {
             MarketApp app = (MarketApp) appDao.findById(appId, MarketApp.class);
 
@@ -536,7 +536,7 @@ public class AppServiceImpl implements AppService {
                 o.put("appMustId", -1);
                 return o.toJSONString();
             } else {
-                AppMust appMust = new AppMust(install, app);
+                AppMust appMust = new AppMust(appMustType, app);
                 appDao.saveOrUpdate(appMust);
 
                 //reset the cache

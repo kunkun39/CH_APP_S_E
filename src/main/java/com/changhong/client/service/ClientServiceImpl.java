@@ -457,7 +457,7 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
                 single.put(ClientInfoProperties.APP_PACKAGE, dto.getPackageName());
                 single.put(ClientInfoProperties.APP_VERSION_INT, dto.getAppVersionInt());
                 single.put(ClientInfoProperties.APP_APK_FILEPATH, dto.getApkActualFileName());
-                single.put("install", dto.isInstall());
+                single.put("appMustType", dto.getAppMustType());
                 all.add(single);
             }
         }
@@ -619,7 +619,6 @@ public class ClientServiceImpl implements ClientService, InitializingBean {
         return values.toJSONString();
     }
 
-    @Override
     public String obtainHomePagePosters() {
         List<HomePagePosterDTO> posters = cacheService.obtainHomePagePoster();
 

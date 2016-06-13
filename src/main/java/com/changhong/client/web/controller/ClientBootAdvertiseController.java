@@ -2,6 +2,8 @@ package com.changhong.client.web.controller;
 
 import com.changhong.client.service.ClientService;
 import com.changhong.common.utils.DesUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
@@ -18,6 +20,8 @@ import java.io.PrintWriter;
  */
 public class ClientBootAdvertiseController extends AbstractController{
 
+    private static final Log logger = LogFactory.getLog(ClientBootAdvertiseController.class);
+
       private ClientService clientService;
 
     @Override
@@ -25,6 +29,8 @@ public class ClientBootAdvertiseController extends AbstractController{
         //获得开机图片的JSPON数据
         String boxMac = ServletRequestUtils.getStringParameter(request, "boxMac");
         boxMac = DesUtils.getDesString(boxMac);
+        logger.info("mac address " + boxMac);
+
         String responseJSON = clientService.obtainBootImage(boxMac);
 
         /*****************返回结果******************/

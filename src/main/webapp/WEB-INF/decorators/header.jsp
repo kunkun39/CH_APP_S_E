@@ -38,8 +38,9 @@
               <li><a href="${pageContext.request.contextPath}/backend/appcategoryoverview.html"><i class="icon icon-hand-right"></i> <span>App Category Management</span></a></li>
               <%--<li><a href="${pageContext.request.contextPath}/backend/apptopicoverview.html"><i class="icon icon-hand-right"></i> <span>App Topic Management</span></a></li>--%>
               <li><a href="${pageContext.request.contextPath}/backend/marketappoverview.html"><i class="icon icon-hand-right"></i> <span>App Info Management</span></a></li>
-              <%--<li><a href="${pageContext.request.contextPath}/backend/appmust.html?install=true"><i class="icon icon-hand-right"></i> <span>Force Install App Management</span></a></li>--%>
-              <%--<li><a href="${pageContext.request.contextPath}/backend/appmust.html?install=false"><i class="icon icon-hand-right"></i> <span>Force Uninstall App Management</span></a></li>--%>
+              <li><a href="${pageContext.request.contextPath}/backend/appmust.html?appMustType=INSTALL"><i class="icon icon-hand-right"></i> <span>Force Install App Management</span></a></li>
+              <li><a href="${pageContext.request.contextPath}/backend/appmust.html?appMustType=UPDATE"><i class="icon icon-hand-right"></i> <span>Force Update App Management</span></a></li>
+              <%--<li><a href="${pageContext.request.contextPath}/backend/appmust.html?appMustType=UN_INSTALL"><i class="icon icon-hand-right"></i> <span>Force Uninstall App Management</span></a></li>--%>
               <%--<li><a href="${pageContext.request.contextPath}/backend/luncherrecommend.html"><i class="icon icon-hand-right"></i> <span>Other Position Recommendation</span></a></li>--%>
           </ul>
         </li>

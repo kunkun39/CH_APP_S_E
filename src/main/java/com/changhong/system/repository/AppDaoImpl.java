@@ -257,8 +257,8 @@ public class AppDaoImpl extends HibernateEntityObjectDao implements AppDao {
         return getHibernateTemplate().find("from AppMust");
     }
 
-    public List<AppMust> loadAppMust(boolean install) {
-        return getHibernateTemplate().find("from AppMust a where a.install = ?", new Object[]{install});
+    public List<AppMust> loadAppMust(String appMustType) {
+        return getHibernateTemplate().find("from AppMust a where a.appMustType = ?", new Object[]{AppMustType.valueOf(appMustType)});
     }
 
     public boolean isAppMustSet(int appId) {

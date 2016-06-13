@@ -44,12 +44,13 @@
 
       <div class="widget-box">
         <div class="widget-title">
-            <a href="javascript:void(0);" onclick="openCategoryDialog('-1', 'add');">
+            <a href="javascript:void(0);">
             <span class="icon">
-                <i class="icon-plus"></i>
+                <i class="icon-tasks"></i>
             </span>
             </a>
             <h5>App Category Management</h5>
+            <div class="buttons"><a href="javascript:void(0);" onclick="openCategoryDialog('-1', 'add');" class="btn btn-mini"><i class="icon-plus"></i> Add Category</a></div>
         </div>
 
         <div class="widget-content nopadding">

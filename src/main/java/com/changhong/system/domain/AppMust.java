@@ -10,24 +10,24 @@ import com.changhong.common.domain.EntityBase;
 public class AppMust extends EntityBase {
 
     //ture stand for must install else stand for uninstall
-    private boolean install;
+    private AppMustType appMustType;
 
     private MarketApp marketApp;
 
     public AppMust() {
     }
 
-    public AppMust(boolean install, MarketApp marketApp) {
-        this.install = install;
+    public AppMust(String appMustType, MarketApp marketApp) {
+        this.appMustType = AppMustType.valueOf(appMustType);
         this.marketApp = marketApp;
     }
 
-    public boolean isInstall() {
-        return install;
+    public AppMustType getAppMustType() {
+        return appMustType;
     }
 
-    public void setInstall(boolean install) {
-        this.install = install;
+    public void setAppMustType(AppMustType appMustType) {
+        this.appMustType = appMustType;
     }
 
     public MarketApp getMarketApp() {
