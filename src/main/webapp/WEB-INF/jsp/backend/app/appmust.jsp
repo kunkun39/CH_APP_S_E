@@ -131,7 +131,7 @@
 <div id="recommendduplicate-dialog-confirm" title="System Information Dialog?" style="visibility: hidden;">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        This app already exist in the list of force install or uninstall apps.
+        This app already exist in the list of force install or update apps.
     </p>
 </div>
 

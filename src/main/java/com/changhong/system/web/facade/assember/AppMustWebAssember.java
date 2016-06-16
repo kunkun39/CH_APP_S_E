@@ -3,6 +3,7 @@ package com.changhong.system.web.facade.assember;
 import com.changhong.system.domain.AppMust;
 import com.changhong.system.domain.MarketApp;
 import com.changhong.system.web.facade.dto.AppMustDTO;
+import com.changhong.system.web.facade.dto.MarketAppDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,22 @@ public class AppMustWebAssember {
         final String apkActualFileName = app.getAppFile().getActualFileName();
 
         return new AppMustDTO(id, appMustType, appId, appName, appVersion, appVersionInt, appKey, iconActualFileName, packageName, apkActualFileName);
+    }
+
+    public static void resetAppMustDTO(AppMustDTO appMustDTO, MarketAppDTO marketAppDTO) {
+        final String appName = marketAppDTO.getAppFullName();
+        final String appVersion = marketAppDTO.getAppVersion();
+        final int appVersionInt = Integer.valueOf(marketAppDTO.getAppVersionInt());
+        final String iconActualFileName = marketAppDTO.getIconActualFileName();
+        final String packageName = marketAppDTO.getAppPackage();
+        final String apkActualFileName = marketAppDTO.getApkActualFileName();
+
+        appMustDTO.setAppName(appName);
+        appMustDTO.setAppVersion(appVersion);
+        appMustDTO.setAppVersionInt(appVersionInt);
+        appMustDTO.setIconActualFileName(iconActualFileName);
+        appMustDTO.setPackageName(packageName);
+        appMustDTO.setApkActualFileName(apkActualFileName);
     }
 
     public static List<AppMustDTO> toAppMustDTOList(List<AppMust> appMusts) {

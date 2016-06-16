@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Peng Jie
@@ -207,6 +208,17 @@ public class LocalCacheServiceImpl implements CacheService {
 
     public void resetMarketAppInCache(MarketAppDTO dto) {
         appCache.put("APP_" + dto.getId(), dto);
+
+        //如果APP MUST里面有，同样会更新
+        Set<String> mustKeys = mustAppCache.keySet();
+        if (mustKeys != null) {
+            for (String mustKey : mustKeys) {
+                AppMustDTO appMustDTO = mustAppCache.get(mustKey);
+                if (appMustDTO.getAppId() == dto.getId()) {
+                    AppMustWebAssember.resetAppMustDTO(appMustDTO, dto);
+                }
+            }
+        }
     }
 
     public MarketAppDTO obtainMarketAppInCache(int appId) {

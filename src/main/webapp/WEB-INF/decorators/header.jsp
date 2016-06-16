@@ -33,7 +33,7 @@
     <li class="active"><a href="${pageContext.request.contextPath}/backend/dashboard.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
 
     <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_APP_INFO,ROLE_APP_STATUS">
-        <li class="submenu"> <a href="javascript:void(0);"><i class="icon icon-th"></i> <span>App Information Management</span> <span class="label">2</span></a>
+        <li class="submenu"> <a href="javascript:void(0);"><i class="icon icon-th"></i> <span>App Information Management</span> <span class="label">4</span></a>
           <ul>
               <li><a href="${pageContext.request.contextPath}/backend/appcategoryoverview.html"><i class="icon icon-hand-right"></i> <span>App Category Management</span></a></li>
               <%--<li><a href="${pageContext.request.contextPath}/backend/apptopicoverview.html"><i class="icon icon-hand-right"></i> <span>App Topic Management</span></a></li>--%>
