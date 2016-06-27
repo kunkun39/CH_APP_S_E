@@ -151,8 +151,11 @@ public class StatisticDaoImpl extends HibernateEntityObjectDao implements Statis
                     Integer categoryGroup = (Integer) result[0];
                     String total = result[1].toString();
 
-                    buffer.append(categoryMapping.get(categoryGroup + "") + ",");
-                    bufferTotal.append(total + ",");
+                    String categoryName = categoryMapping.get(categoryGroup + "");
+                    if (categoryName != null) {
+                        buffer.append(categoryName + ",");
+                        bufferTotal.append(total + ",");
+                    }
                 }
 
             }
@@ -184,8 +187,11 @@ public class StatisticDaoImpl extends HibernateEntityObjectDao implements Statis
                     Integer categoryGroup = (Integer) result[0];
                     String total = result[1].toString();
 
-                    buffer.append(categoryMapping.get(categoryGroup + "") + ",");
-                    bufferTotal.append(total + ",");
+                    String categoryName = categoryMapping.get(categoryGroup + "");
+                    if (categoryName != null) {
+                        buffer.append(categoryName + ",");
+                        bufferTotal.append(total + ",");
+                    }
                 }
 
             }
